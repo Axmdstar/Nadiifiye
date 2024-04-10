@@ -9,6 +9,8 @@ import HomeLayout from "./Pages/Layout/HomeLayout";
 import HomePage from "./Pages/HomePage";
 import AdminDashBoardLayout from "./Pages/Layout/AdminDashBdLayOut";
 import AdminDashBoard from "./Pages/AdminDashBoard";
+import CompaniesPage from "./Pages/Companies";
+import CampainsPage from "./Pages/Campains";
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -22,8 +24,8 @@ const Router = createBrowserRouter(
       {/* No loader or fetch function yet  */}
       <Route path="Admin" element={<AdminDashBoardLayout />}>
         <Route index element={<AdminDashBoard />} />
-        {/* <Route path='Companies' element={< />} /> */}
-        {/* <Route path='Campains' element={< />} /> */}
+        <Route path='Companies' element={< CompaniesPage/>} />
+        <Route path='Campains' element={<CampainsPage />} />
         {/* <Route path='Volunteers' element={< />} /> */}
         {/* <Route path='Reporting' element={< />} /> */}
       </Route>
