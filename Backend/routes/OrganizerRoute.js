@@ -43,9 +43,10 @@ const imageLocation = multer.diskStorage({
     cb(null, file.originalname);
   },
 });
+
 const uploadimg = multer({ storage: imageLocation });
 //add organizer
-app.post("/addorganizer", uploadimg.single("image"), async (req, res) => {
+app.post("/addorganizer", uploadimg.single("profileImage"), async (req, res) => {
   try {
     const newData = new OrganizerModel({
       Name: req.body.Name,
@@ -64,6 +65,7 @@ app.post("/addorganizer", uploadimg.single("image"), async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 //update organizer
 app.put("/update/:id", async (req, res) => {
   try {
@@ -71,9 +73,12 @@ app.put("/update/:id", async (req, res) => {
       { _id: req.params.id },
       { $set: req.body }
     );
-    if (updateData.nModified === 0) {
+
+    console.log('req.body :>> ', req.body);
+    if (updateData.n === 0) {
       return res.status(404).json({ error: "No organizer updated" });
     }
+    
     res.json({
       status: "success",
       message: "successfully updated",
@@ -82,6 +87,7 @@ app.put("/update/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 //delete organizer
 app.delete("/delete/:id", async (req, res) => {
   try {

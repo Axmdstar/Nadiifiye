@@ -44,6 +44,7 @@ const imageLocation = multer.diskStorage({
   },
 });
 const uploadimg = multer({ storage: imageLocation });
+
 //create campaign
 app.post("/addCampaign", uploadimg.single("image"), async (req, res) => {
   try {
@@ -65,6 +66,7 @@ app.post("/addCampaign", uploadimg.single("image"), async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 //update campaigns
 app.put("/update/:id", async (req, res) => {
   try {
@@ -83,6 +85,7 @@ app.put("/update/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 //delete campaings
 app.delete("/delete/:id", async (req, res) => {
   try {
