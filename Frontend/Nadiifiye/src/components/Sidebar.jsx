@@ -1,4 +1,4 @@
-import { ChevronFirst, ChevronLast, MoreVertical } from "lucide-react"
+import { ChevronFirst, ChevronLast } from "lucide-react"
 import logo from "../assets/Logo.jpeg"
 import profile from "../assets/react.svg"
 import { createContext, useContext, useState } from "react"
@@ -9,8 +9,8 @@ export default function Sidebar({ children }) {
     const [expanded, setExpanded] = useState(false)
     return (
         <>
-            <aside className="h-screen">
-                <nav className="h-full flex flex-col bg-white border-r shadow-sm">
+            <aside className="h-screen  ">
+                <nav className="h-full  flex flex-col bg-white border-r shadow-sm mr-10">
                     <div className="p-4 pb-2 flex justify-between items-center">
                         <img src={logo} className={`overflow-hidden transition-all ${expanded ? "w-32" : "w-0"}`} />
                         <button onClick={() => setExpanded((curr) => !curr)} className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100">
