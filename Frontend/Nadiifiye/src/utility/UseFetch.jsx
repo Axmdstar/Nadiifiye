@@ -22,7 +22,8 @@ const useFetch =  (Url) => {
     
 
     return {
-        ResData
+        ResData,
+        setResData
     };
 }
  

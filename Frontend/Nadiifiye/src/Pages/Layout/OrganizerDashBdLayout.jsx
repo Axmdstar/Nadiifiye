@@ -13,12 +13,8 @@ const AdminDashBoardLayout = () => {
         <UserContext.Provider value="">
         <div className="flex">
         <Sidebar className="">
-          {/*  */}
-          <NavLink to={"Organizer"}>
-            <SidebarItem  icon={<Stamp size={20} />} text="Organizer" active={ CurrentPath === "Organizer" ? true : false}  />
-          </NavLink>
 
-          <NavLink to={"Campaigns"}>
+          <NavLink to={"My Campaigns"}>
             <SidebarItem icon={<ClipboardList size={20} />} text="Campains" active={ CurrentPath === "Campains" ? true : false} />
           </NavLink>
 

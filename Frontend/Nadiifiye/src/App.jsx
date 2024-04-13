@@ -10,7 +10,8 @@ import HomePage from "./Pages/HomePage";
 import AdminDashBoardLayout from "./Pages/Layout/AdminDashBdLayOut";
 import AdminDashBoard from "./Pages/AdminDashBoard";
 import OrganizerPage from "./Pages/OrganizerPage";
-import CampainsPage from "./Pages/Campains";
+import CampainsPage from "./Pages/CampainsPage";
+import VolunteersPage from "./Pages/Volunteers";
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -26,7 +27,7 @@ const Router = createBrowserRouter(
         <Route index element={<AdminDashBoard />} />
         <Route path='Organizer' element={< OrganizerPage/>} />
         <Route path='Campaigns' element={<CampainsPage />} />
-        {/* <Route path='Volunteers' element={< />} /> */}
+        <Route path='Volunteers' element={<VolunteersPage />} />
         {/* <Route path='Reporting' element={< />} /> */}
       </Route>
       

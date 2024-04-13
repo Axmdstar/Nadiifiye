@@ -8,37 +8,53 @@ const SidebarContext = createContext();
 export default function Sidebar({ children }) {
     const [expanded, setExpanded] = useState(false)
     return (
-        <>
-            <aside className="h-screen  ">
-                <nav className="h-full  flex flex-col bg-white border-r shadow-sm mr-10">
-                    <div className="p-4 pb-2 flex justify-between items-center">
-                        <img src={logo} className={`overflow-hidden transition-all ${expanded ? "w-32" : "w-0"}`} />
-                        <button onClick={() => setExpanded((curr) => !curr)} className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100">
-                            {expanded ? <ChevronFirst /> : <ChevronLast />}
-                        </button>
-                    </div>
+      <>
+        <aside className="h-screen  ">
+          <nav className="h-full  flex flex-col bg-white border-r shadow-sm mr-10">
+            <div className="p-4 pb-2 flex justify-between items-center">
+              <img
+                src={logo}
+                className={`overflow-hidden transition-all ${
+                  expanded ? "w-32" : "w-0"
+                }`}
+              />
+              <button
+                onClick={() => setExpanded((curr) => !curr)}
+                className="p-1.5 rounded-lg bg-gray-50 hover:bg-gray-100"
+              >
+                {expanded ? <ChevronFirst /> : <ChevronLast />}
+              </button>
+            </div>
 
-                    <SidebarContext.Provider value={{ expanded }}>
+            <SidebarContext.Provider value={{ expanded }}>
+              <ul className="flex-1 px-3">{children}</ul>
+            </SidebarContext.Provider>
 
-                        <ul className="flex-1 px-3">{children}</ul>
-                    </SidebarContext.Provider>
+            <div className="border-t flex p-3">
+              {/* <p>Log Out Btn</p> */}
+              <img src={profile} className="w-10 h-10 rounded-md" />
+              <div
+                className={`flex justify-between items-center overflow-hidden transition-all ${
+                  expanded ? "w-52 ml-3" : "w-0"
+                } `}
+              >
+                <div className="leading-4">
+                  <h4 className="font-semibold">UserName</h4>
+                  <span className="text-xs text-gray-600">Email</span>
+                </div>
 
-                    <div className="border-t flex p-3">
-                        {/* <p>Log Out Btn</p> */}
-                        <img src={profile} className="w-10 h-10 rounded-md" />
-                        <div className={`flex justify-between items-center overflow-hidden transition-all ${expanded ? "w-52 ml-3" : "w-0"} `}>
-                            <div className="leading-4">
-                                <h4 className="font-semibold">UserName</h4>
-                                <span className="text-xs text-gray-600">Email</span>
-                            </div>
-                            {/* <MoreVertical size={20} /> */}
-                            <p>Log Out</p>
-                        </div>
-                    </div>
-                </nav>
-            </aside>
-        </>
-    )
+                <button
+                  type="button"
+                  className="inline-block rounded bg-green-400 px-6 pb-2 pt-2.5 text-xs font-medium uppercase leading-normal text-white shadow-[0_4px_9px_-4px_#3b71ca] transition duration-150 ease-in-out hover:bg-green-600 hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:bg-green-600 focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] focus:outline-none focus:ring-0 active:bg-green-700 active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.3),0_4px_18px_0_rgba(59,113,202,0.2)] dark:shadow-[0_4px_9px_-4px_rgba(59,113,202,0.5)] dark:hover:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:focus:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)] dark:active:shadow-[0_8px_9px_-4px_rgba(59,113,202,0.2),0_4px_18px_0_rgba(59,113,202,0.1)]"
+                >
+                  Logout
+                </button>
+              </div>
+            </div>
+          </nav>
+        </aside>
+      </>
+    );
 }
 
 export function SidebarItem({ icon, text, active, alert }) {

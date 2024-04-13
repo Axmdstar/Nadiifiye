@@ -38,8 +38,7 @@ const imageLocation = multer.diskStorage({
     cb(null, "organizerImage");
   },
   filename: (req, file, cb) => {
-    // console.log(file);
-    // cb(null, Date.now() +path.extname(file.originalname));
+    
     cb(null, file.originalname);
   },
 });
@@ -47,6 +46,7 @@ const imageLocation = multer.diskStorage({
 const uploadimg = multer({ storage: imageLocation });
 //add organizer
 app.post("/addorganizer", uploadimg.single("profileImage"), async (req, res) => {
+  // console.log('req :>> ', req);
   try {
     const newData = new OrganizerModel({
       Name: req.body.Name,
@@ -56,6 +56,7 @@ app.post("/addorganizer", uploadimg.single("profileImage"), async (req, res) => 
       website: req.body.website,
       profileImage: req.file.filename,
     });
+    
     const saveData = await newData.save();
     res.json({
       status: "success",
@@ -63,6 +64,7 @@ app.post("/addorganizer", uploadimg.single("profileImage"), async (req, res) => 
     });
   } catch (err) {
     res.status(500).json({ error: err.message });
+    // console.log('req.file.filename :>> ', req.file.filename);
   }
 });
 
