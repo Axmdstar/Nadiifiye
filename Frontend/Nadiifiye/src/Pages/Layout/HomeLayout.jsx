@@ -3,9 +3,9 @@ import {Outlet} from 'react-router-dom';
 const HomeLayout = () => {
     return ( 
         <>
-            <p>NavBar</p>
+            {/* <p>NavBar</p> */}
                 <Outlet />
-            <p>Footer</p>
+            {/* <p>Footer</p> */}
         </>
      );
 }
