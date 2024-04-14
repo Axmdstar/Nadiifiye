@@ -24,10 +24,22 @@ const useFetch =  () => {
         };
         
     
+      const SingleFetch = async (id) => {
+        try {
+          const response = await fetch("/single/" + id);
+          const data = await response.json();
+          if (response.ok) {
+            return data;
+          }
+        } catch (error) {
+          console.log('error :>> ');  
+        }
+      };
     
 
     return {
         DelFetch,
+        SingleFetch
     };
 }
  

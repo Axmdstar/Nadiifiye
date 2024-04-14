@@ -11,12 +11,14 @@ const authRoutes = require("./routes/auth");
 const CampaignRoute = require("./routes/CampaignRoute");
 const VolunteerRoute = require("./routes/VolunteerRoute");
 const OrganizerRoute = require("./routes/OrganizerRoute");
+const JoinedRoute = require("./routes/JoinedRoute");
 
 //  routes
 app.use("/api/auth", authRoutes);
 app.use("/Campaign", CampaignRoute);
 app.use("/Volunteer", VolunteerRoute);
 app.use("/Organizer", OrganizerRoute);
+app.use("/Joined", JoinedRoute)
 
 // api protected
 app.get("/api/protected", authMiddleware, (req, res) => {

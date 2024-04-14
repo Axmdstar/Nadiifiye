@@ -10,7 +10,7 @@ const path = require("path");
 //show all volunteers
 app.get("/AllVolunteers", async (req, res) => {
   try {
-    const getData = await VolunteerModel.find().poplute('Campaigns');
+    const getData = await VolunteerModel.find();
     res.send(getData);
   } catch (err) {
     res.status(500).json({ error: err.message });
