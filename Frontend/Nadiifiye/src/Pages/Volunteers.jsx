@@ -1,9 +1,32 @@
+import { useEffect, useState } from "react";
+
 const VolunteersPage = () => {
+    const [Vlist, setVlist] = useState([]);
+    
+    const MainUrl = "http://localhost:4000/Volunteer";
+    const Apipath = "/AllVolunteers"
+    // http://localhost:4000/Volunteer/AllVolunteers
+    
+    useEffect(()=>{
+      fetch(MainUrl + Apipath)
+              .then((res) => {
+                  return res.json();
+              })
+              .then((data) => {
+                  setVlist(data)
+                  console.log('data :>> ', data);
+              })
+              .catch((err) => {
+                  console.log('err :>> ', err);
+              })
+    }, [])
+
+
     return ( 
         <div className="w-full ">
       {/* Title  */}
-      <div className="">
-        <h1 className="text-4xl py-5">Volunteers</h1>
+      <div className="text-gray-600">
+        <h1 className=" font-medium text-4xl py-5">Volunteers</h1>
       </div>
 
       {/* table */}
@@ -43,7 +66,7 @@ const VolunteersPage = () => {
                     
 
                     
-                    {/* {ResData.length === 0 ?
+                    {Vlist.length === 0 ?
                     <tr className="">
                       <td colSpan={6} className=" text-center">
                         <p className="text-xl"> Empty </p> 
@@ -51,7 +74,7 @@ const VolunteersPage = () => {
                     </tr>
                      :
                      
-                     ResData.map((item, i) => {
+                     Vlist.map((item, i) => {
                       return (
                         <tr
                           key={i}
@@ -78,14 +101,16 @@ const VolunteersPage = () => {
                             {item.Emaail}
                           </td>
                           <td className="whitespace-nowrap px-6 py-4">
-                            {item.website}
+                            {item.TypeOfInterest}
                           </td>
                           <td className="whitespace-nowrap px-6 py-4">
-                            <DeleteBtn id={item._id} Route={"Organizer"} onDelete={handleDelete} />
+                            {item.numOfEvent}
                           </td>
+
+
                         </tr>
                       );
-                    })} */}
+                    })}
                   </tbody>
                 </table>
               </div>

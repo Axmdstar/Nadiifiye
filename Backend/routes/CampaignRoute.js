@@ -46,7 +46,7 @@ const imageLocation = multer.diskStorage({
 const uploadimg = multer({ storage: imageLocation });
 
 //create campaign
-app.post("/addCampaign", uploadimg.single("image"), async (req, res) => {
+app.post("/addCampaign", uploadimg.single("Image"), async (req, res) => {
   try {
     const newData = new CampaignsModel({
       Name: req.body.Name,
@@ -101,6 +101,15 @@ app.delete("/delete/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+app.get("/OrgCampaign/:Organizer", async (req, res) => {
+  try {
+    const OrgCampaigns = await CampaignsModel.find({Organizer: req.params.Organizer});
+    res.send(OrgCampaigns)    
+  } catch (err) {
+    res.status(500).json({err: error.message})
+  }
+})
 
 // total Campaigns
 app.get("/total", async (req, res) => {

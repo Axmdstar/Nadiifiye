@@ -4,22 +4,22 @@ import Sidebar,{SidebarItem} from "../../components/Sidebar";
 import { useLocation, NavLink } from "react-router-dom";
 import { UserContext } from "../../utility/UserContext";
 
-const AdminDashBoardLayout = () => {
+const OrganizerDshBLayout = () => {
   const location = useLocation();
-  const CurrentPath = location.pathname.slice(7);
-  // console.log('CurrentPath :>> ', CurrentPath);
+  const CurrentPath = location.pathname;
+  console.log('CurrentPath :>> ', CurrentPath);
   
     return ( 
         <UserContext.Provider value="">
         <div className="flex">
         <Sidebar className="">
 
-          <NavLink to={"My Campaigns"}>
-            <SidebarItem icon={<ClipboardList size={20} />} text="Campains" active={ CurrentPath === "Campains" ? true : false} />
+          <NavLink to={"/Organizer"}>
+            <SidebarItem icon={<ClipboardList size={20} />} text="Campains" active={ CurrentPath === "Organizer" ? true : false} />
           </NavLink>
 
-          <NavLink to={"Volunteers"}>
-            <SidebarItem icon={<Users size={20} />} text="Volunteers" active={ CurrentPath === "volunteers" ? true : false} />
+          <NavLink to={"Volunteer"}>
+            <SidebarItem icon={<Users size={20} />} text="Volunteers" active={ CurrentPath === "volunteer" ? true : false} />
           </NavLink>
 
           <NavLink>
@@ -38,4 +38,4 @@ const AdminDashBoardLayout = () => {
      );
 }
  
-export default AdminDashBoardLayout;
+export default OrganizerDshBLayout;

@@ -3,31 +3,26 @@ import useFetch from "../utility/UseFetch";
 
 
 
+// export const DeleteBtn = ({ id, Route, onDelete }) => {
 
-
-
-
-
-export const DeleteBtn = ({ id, Route, onDelete }) => {
-
-    console.log('id :>> ', id);
-    const handleClick = async () => {
-      try {
-        const response = await fetch(`http://localhost:4000/${Route}/delete/${id}`, {
-          method: 'DELETE',
-        });
-        if (response.ok) {
-          onDelete(); // Call the onDelete callback function passed from the parent component
-        } else {
-          console.error('Failed to delete item');
-        }
-      } catch (error) {
-        console.error('Error deleting item:', error);
-      }
-    };
+//     console.log('id :>> ', id);
+//     const handleClick = async () => {
+    //   try {
+    //     const response = await fetch(`http://localhost:4000/${Route}/delete/${id}`, {
+    //       method: 'DELETE',
+    //     });
+    //     if (response.ok) {
+    //       onDelete(); // Call the onDelete callback function passed from the parent component
+    //     } else {
+    //       console.error('Failed to delete item');
+    //     }
+    //   } catch (error) {
+    //     console.error('Error deleting item:', error);
+    //   }
+    // };
   
-    return <button onClick={handleClick}>Delete</button>;
-  };
+//     return <button onClick={handleClick}>Delete</button>;
+//   };
   
 
 // export const DeleteBtn = ({id, Route, index}) => {

@@ -1,10 +1,11 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const path = require("path")
 require("dotenv").config();
 const authMiddleware = require("./middleware/authMiddleware");
 const app = express();
 app.use(express.json());
-
+app.use('/img', express.static(path.join(__dirname, '/organizerImage')));
 // Import routes
 const authRoutes = require("./routes/auth");
 const CampaignRoute = require("./routes/CampaignRoute");

@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const Campaigns = require("./Campaigns");
+const Schema = mongoose.Schema;
 
 const VolunteerModel = mongoose.Schema(
   {
@@ -29,7 +31,8 @@ const VolunteerModel = mongoose.Schema(
     profileImage: {
       type: String,
       required: true,
-    },
+    }
+    
   },
   { timestamps: true }
 );

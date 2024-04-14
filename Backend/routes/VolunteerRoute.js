@@ -10,12 +10,14 @@ const path = require("path");
 //show all volunteers
 app.get("/AllVolunteers", async (req, res) => {
   try {
-    const getData = await VolunteerModel.find();
+    const getData = await VolunteerModel.find().poplute('Campaigns');
     res.send(getData);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
 });
+
+
 
 //show single volunteer
 app.get("/single/:id", async (req, res) => {
@@ -44,8 +46,9 @@ const imageLocation = multer.diskStorage({
   },
 });
 const uploadimg = multer({ storage: imageLocation });
+
 //add volunteer
-app.post("/addVolunteer", uploadimg.single("image"), async (req, res) => {
+app.post("/addVolunteer", uploadimg.single("profileImage"), async (req, res) => {
   try {
     const newData = new VolunteerModel({
       Name: req.body.Name,
@@ -65,6 +68,7 @@ app.post("/addVolunteer", uploadimg.single("image"), async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 //update volunteer
 app.put("/update/:id", async (req, res) => {
   try {
@@ -83,6 +87,7 @@ app.put("/update/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 //delete volunteer
 app.delete("/delete/:id", async (req, res) => {
   try {

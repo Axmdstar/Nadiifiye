@@ -1,11 +1,33 @@
+import { useEffect, useState } from "react";
+import useFetch from "../utility/UseFetch";
+
 const CampainsPage = () => {
+    const [CampaignList, setCampaignList] = useState([]);
+    const MainUrl = "http://localhost:4000/Campaign";
+    const Apipath = "/AllCampaigns";
+
+    // http://localhost:4000/Campaign/AllCampaigns
+    
+    useEffect(()=>{
+      fetch(MainUrl + Apipath)
+              .then((res) => {
+                  return res.json();
+              })
+              .then((data) => {
+                  setCampaignList(data)
+                  console.log('data :>> ', data);
+              })
+              .catch((err) => {
+                  console.log('err :>> ', err);
+              })
+    }, [])
 
 
     return ( 
         <div className="w-full ">
       {/* Title  */}
-      <div className="">
-        <h1 className="text-4xl py-5">Campaigns</h1>
+      <div className="text-gray-600">
+        <h1 className=" font-medium text-4xl py-5">Campaigns</h1>
         
       </div>
 
@@ -42,7 +64,7 @@ const CampainsPage = () => {
                     
 
                     
-                    {/* {ResData.length === 0 ?
+                    {CampaignList.length === 0 ?
                     <tr className="">
                       <td colSpan={6} className=" text-center">
                         <p className="text-xl"> Empty </p> 
@@ -50,41 +72,34 @@ const CampainsPage = () => {
                     </tr>
                      :
                      
-                     ResData.map((item, i) => {
+                     CampaignList.map((item, i) => {
                       return (
                         <tr
                           key={i}
                           className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-green-100"
                         >
-                          <td className="whitespace-nowrap px-6 py-4 font-medium">
-                            <img
-                              src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"
-                              className="w-12 rounded-full"
-                              alt="Avatar"
-                            />
-                          </td>
 
                           <td className="whitespace-nowrap px-6 py-4">
                             {item.Name}
                           </td>
                           <td className="whitespace-nowrap px-6 py-4">
-                            {item.Phone}
+                            {item.Organizer}
                           </td>
                           <td className="whitespace-nowrap px-6 py-4">
-                            {item.Address}
+                            {item.Location}
                           </td>
                           <td className="whitespace-nowrap px-6 py-4">
-                            {item.Emaail}
+                            {item.DateTime}
                           </td>
                           <td className="whitespace-nowrap px-6 py-4">
-                            {item.website}
+                            {item.Type}
                           </td>
                           <td className="whitespace-nowrap px-6 py-4">
-                            DeleteBtn
+                            {item.NumOfPeople}
                           </td>
                         </tr>
                       );
-                    })} */}
+                    })}
                   </tbody>
                 </table>
               </div>
