@@ -41,6 +41,7 @@ export default function OrgUpdate() {
 //     console.log({error})
 // })
 //     }
+//////////////////////////
 
     useEffect(()=>{
        axios.get('http://localhost:4000/Organizer/single/'+id).then((response)=>{
