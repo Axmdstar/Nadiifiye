@@ -13,7 +13,7 @@ function Login() {
     e.preventDefault();
     try {
       // Replace 'http://localhost:3000/api/auth/login' with your actual login API endpoint
-     await axios.post('http://localhost:3000/api/auth/login', {
+     await axios.post('http://localhost:4000/auth/login', {
         email: email,
         password: password,
       });

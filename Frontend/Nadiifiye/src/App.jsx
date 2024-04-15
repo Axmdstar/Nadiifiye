@@ -1,3 +1,4 @@
+
 import "./App.css";
 import {
   Route,
@@ -20,6 +21,9 @@ import RegisterLayout from "./Pages/Layout/RegisterLayout";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import ForgotPassword from "./components/ForgetPassword";
+import  Campaign  from "./Pages/Campaign";
+import Contact from "./Pages/Contact"
+
 
 
 
@@ -27,19 +31,22 @@ const Router = createBrowserRouter(
   createRoutesFromElements(
     // Missing errorElement={<>}
     // Loader Function loader={}
-    <Route path="/" element={<HomeLayout />}>
-      <Route index element={<HomePage />} />
-      {/* <Route path='/aboutus' element={<AboutUsPage />} /> */}
-{/* {tes foo} */}
-      {/* Dashboard Route  */}
-      {/* No loader or fetch function yet  */}
+    <Route path="/" >
+
+      <Route path="Home" element={<HomeLayout />}>
+        <Route index element={<HomePage />} />
+        <Route path="contact" element={<Contact />} /> 
+        <Route path="campaigns" element={<Campaign />} />
+      </Route>
+      
+
       <Route path="Admin" element={<AdminDashBoardLayout />}>
         <Route index element={<AdminDashBoard />} />
         <Route path='Organizer' element={<OrganizerPage />} />
         <Route path='Campaigns' element={<CampainsPage />} />
         <Route path='Volunteers' element={<VolunteersPage />} />
-        
       </Route>
+
 
       <Route path="Organizer" element={<OrganizerDshBLayout />}>
         <Route index element={<OrgCampaigns/>} />
