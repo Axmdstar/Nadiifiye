@@ -15,6 +15,7 @@ import VolunteersPage from "./Pages/Volunteers";
 import OrganizerDshBLayout from "./Pages/Layout/OrganizerDashBdLayout";
 import OrgCampaigns from "./Pages/OrgCampaigns";
 import OrgVolunteer from "./Pages/OrgVoluntees";
+import OrgUpdate from "./Pages/OrgUpdate";
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,6 +32,9 @@ const Router = createBrowserRouter(
         <Route path='Organizer' element={<OrganizerPage />} />
         <Route path='Campaigns' element={<CampainsPage />} />
         <Route path='Volunteers' element={<VolunteersPage />} />
+        
+        {/* ///updateRoute */}
+        <Route path='updateOrg/:id' element={<OrgUpdate />} />
         {/* <Route path='Reporting' element={< />} /> */}
       </Route>
 
