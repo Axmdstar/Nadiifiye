@@ -9,7 +9,7 @@ export default function OrgUpdate() {
   // const [website, setwebsite] = useState("");
   // const [tel, setTel] = useState("");
   // const [addrss, setAddress] = useState("");
-  // const [file, setFile] = useState(null);
+  const [file, setFile] = useState(null);
   //const [imageFile, setImageFile] = useState(null);
   const [FormState, setFormState] = useState(false);
   //get SingleONe
