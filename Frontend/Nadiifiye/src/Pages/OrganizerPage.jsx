@@ -3,6 +3,7 @@ import useFetch from "../utility/UseFetch";
 import { Trash2, Edit} from "lucide-react";
 
 import { Plus } from "lucide-react"
+import { Link } from "react-router-dom";
 
 // import { DeleteBtn } from "../components/buttons";
 
@@ -59,7 +60,7 @@ const OrganizerPage = () => {
     formdata.append("Address", addrss);
     formdata.append("Emaail", email);
     formdata.append("website", website);
-    formdata.append("profileImage", file);
+    formdata.append("organizerImage", file);
 
     const requestOptions = {
       method: "POST",
@@ -228,7 +229,7 @@ const OrganizerPage = () => {
                               <img
                                 src={`http://localhost:4000/uploads/organizerImage/${item.profileImage}`}
                                 className="w-12 rounded-full"
-                                alt="Avatar"
+                                alt="avatar"
                               />
                             </td>
 
@@ -248,8 +249,14 @@ const OrganizerPage = () => {
                               {item.website}
                             </td>
                             <td className="whitespace-nowrap px-6 py-4">
+                              <Link to={`../updateOrg/${item._id}`}>
+                              <Edit className="text-green-600"></Edit>
+                              </Link>
+                           
+                            </td>
+                            <td className="whitespace-nowrap px-6 py-4">
                               <button type="button" onClick={() => {handleDelete(item._id)}}>
-                                <Trash2></Trash2>
+                                <Trash2 className="text-red-600 text-3xl"></Trash2>
                               </button>
                             </td>
                           </tr>
