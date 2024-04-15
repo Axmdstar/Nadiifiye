@@ -14,22 +14,15 @@ const OrganizerDshBLayout = () => {
         <div className="flex">
         <Sidebar className="">
 
-          <NavLink to={"/Organizer"}>
-            <SidebarItem icon={<ClipboardList size={20} />} text="Campains" active={ CurrentPath === "Organizer" ? true : false} />
+          <NavLink to={"../Organizer"}>
+            <SidebarItem icon={<ClipboardList size={20} />} text="Campaigns"  />
           </NavLink>
 
           <NavLink to={"Volunteer"}>
-            <SidebarItem icon={<Users size={20} />} text="Volunteers" active={ CurrentPath === "volunteer" ? true : false} />
-          </NavLink>
-
-          <NavLink>
-            <SidebarItem icon={<Flag size={20} />} text="Reporting" active={ CurrentPath === "reporting" ? true : false} />
+            <SidebarItem icon={<Users size={20} />} text="Volunteers"  />
           </NavLink>
 
         </Sidebar>
-        
-        
-
         <Outlet />
         
         

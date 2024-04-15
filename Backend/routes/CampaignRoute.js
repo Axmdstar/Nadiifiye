@@ -35,7 +35,7 @@ app.get("/single/:id", async (req, res) => {
 // image
 const imageLocation = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "CampaignImage");
+    cb(null, "uploads/CampaignImage");
   },
   filename: (req, file, cb) => {
     // console.log(file);

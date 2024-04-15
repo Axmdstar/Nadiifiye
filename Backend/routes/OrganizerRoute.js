@@ -35,7 +35,7 @@ app.get("/single/:id", async (req, res) => {
 // image
 const imageLocation = multer.diskStorage({
   destination: (req, file, cb) => {
-    cb(null, "organizerImage");
+    cb(null, "uploads/organizerImage");
   },
   filename: (req, file, cb) => {
     

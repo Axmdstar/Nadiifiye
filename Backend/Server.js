@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path")
 require("dotenv").config();
+const cors = require('cors');
 const authMiddleware = require("./middleware/authMiddleware");
 const app = express();
 app.use(express.json());
@@ -12,13 +13,19 @@ const CampaignRoute = require("./routes/CampaignRoute");
 const VolunteerRoute = require("./routes/VolunteerRoute");
 const OrganizerRoute = require("./routes/OrganizerRoute");
 const JoinedRoute = require("./routes/JoinedRoute");
+const UserRoute = require("./routes/UserRoute")
+const DashBoardRoute = require("./routes/DashBoardRoute")
+
+app.use('/uploads', express.static('uploads'));
 
 //  routes
-app.use("/api/auth", authRoutes);
+app.use("/auth", authRoutes);
 app.use("/Campaign", CampaignRoute);
 app.use("/Volunteer", VolunteerRoute);
 app.use("/Organizer", OrganizerRoute);
 app.use("/Joined", JoinedRoute)
+app.use("/UserInfo", UserRoute)
+app.use("/AdminDsh", DashBoardRoute)
 
 // api protected
 app.get("/api/protected", authMiddleware, (req, res) => {

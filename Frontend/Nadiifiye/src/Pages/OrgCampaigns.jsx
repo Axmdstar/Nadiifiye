@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import useFetch from "../utility/UseFetch";
 import { Trash2, Plus} from "lucide-react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 const OrgCampaigns = () => {
     const [CampaignList, setCampaignList] = useState([]);
@@ -10,6 +12,17 @@ const OrgCampaigns = () => {
     const { DelFetch } = useFetch();
 
     const demoName = "Axmed";
+
+    
+
+    // formdata 
+    const [name, setName] = useState("");
+    const [Location, setLocation] = useState("");
+    const [startDate, setStartDate] = useState(new Date());
+    const [Type, setType] = useState("");
+    const [NumOfPeople, setNumOfPeople] = useState("");
+    const [file, setFile] = useState();
+
 
     useEffect(()=>{
         fetch(MainUrl + Apipath + demoName)
@@ -25,6 +38,36 @@ const OrgCampaigns = () => {
                 })
       }, [])
     
+
+
+    const NewCampaigns = (e) => {
+      e.preventDefault();
+
+      console.log(name);
+      console.log(Location);
+      console.log(startDate);
+    const formdata = new FormData();
+    formdata.append("Name", name);
+    formdata.append("Organizer", demoName);
+    formdata.append("Location", Location);
+    formdata.append("DateTime", startDate);
+    formdata.append("Type", Type);
+    formdata.append("NumOfPeople", NumOfPeople);
+    formdata.append("Image", file);
+
+    const requestOptions = {
+      method: "POST",
+      body: formdata,
+      redirect: "follow"
+    };
+
+    console.log('formdata :>> ', formdata);
+    fetch("http://localhost:4000/Campaign/addCampaign", requestOptions)
+    .then((response) => response.json())
+    .then((result) => alert(result.message))
+    .catch((error) => console.error(error));
+
+    }
 
 
     const handleDelete = (id) => {
@@ -43,7 +86,85 @@ const OrgCampaigns = () => {
       {FormState 
       ?
       <div>
+        <div>
         
+          <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 lg:grid-cols-3">
+  
+            <div className="flex flex-col">
+            <div className="text-gray-600 ">
+              <p className="font-medium text-4xl py-5">New Campaign</p>
+              <p>Please fill out all the fields.</p>
+            </div>
+  
+            <form className="mt-10" onSubmit={NewCampaigns} >
+  
+              <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+  
+                <div className="md:col-span-5">
+                  <label  className="font-medium">Campaign Name</label>
+                  <input type="text" name="full_name" id="full_name" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                    onChange={(e) => setName(e.target.value)}
+                    />
+                </div>
+  
+                <div className="md:col-span-5">
+                  <label htmlFor="email" className="font-medium">Type</label>
+                  <input type="text" name="email" id="email" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50" 
+                  onChange={(e) => setType(e.target.value)}
+                  />
+                </div>
+  
+                <div className="md:col-span-3">
+                  <label htmlFor="Location" className="font-medium">Location</label>
+                  <input type="text" name="address" id="address" className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="" 
+                  onChange={(e) => setLocation(e.target.value)}
+                  />
+                </div>
+  
+                <div className="md:col-span-2">
+                  <label >Number of Volunteers</label>
+                  <input type="text"   className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="" 
+                  onChange={(e) => setNumOfPeople(e.target.value)}
+                  />
+                </div>
+
+                <div className="md:col-span-2">
+                <label htmlFor="city">Date</label>
+                    <DatePicker className="h-10 py-2 border mt-1 rounded px-4 w-full bg-gray-50" selected={startDate} onChange={(date) => setStartDate(date)} />
+                </div>
+
+                
+                
+  
+                </div>
+                
+              {/* file */}
+              <div className="py-8">
+                <input type="file" name="image" id="image" 
+                onChange={(e) => setFile(e.target.files[0])}
+                />
+              </div>
+  
+                <div className="md:col-span-5 text-right pt-7 flex gap-4">
+  
+                  {/* submit  */}
+                  <div className="inline-flex items-end">
+                    <input type="submit" className="bg-blue-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded" placeholder="Submit"/>
+                  </div>
+  
+                  {/* Cancel  */}
+                  <div className="inline-flex items-end">
+                    <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" 
+                      onClick={() => setFormState(false)}
+                      >Cancel</button>
+                  </div>
+                  
+                </div>
+  
+              </form>
+            </div>
+          </div>
+        </div>
       
       </div>
     

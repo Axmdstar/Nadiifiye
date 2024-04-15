@@ -50,6 +50,7 @@ const OrganizerPage = () => {
     }
   };
 
+  
   function NewOrg (e) {
     e.preventDefault();
     
@@ -226,7 +227,7 @@ const OrganizerPage = () => {
                           >
                             <td className="whitespace-nowrap px-6 py-4 font-medium">
                               <img
-                                src={item.profileImage}
+                                src={`http://localhost:4000/uploads/organizerImage/${item.profileImage}`}
                                 className="w-12 rounded-full"
                                 alt="avatar"
                               />
