@@ -24,8 +24,7 @@ export default function OrgUpdate() {
     website:""
 
   })
-
-//     const HandlegetSigle =()=>{
+/////////////comm/     const HandlegetSigle =()=>{
 
 // axios.get(`http://localhost:4000/Organizer/single/${params.id}`).then((response)=>{
 // console.log(response.data)   
