@@ -82,7 +82,7 @@ const VolunteersPage = () => {
                         >
                           <td className="whitespace-nowrap px-6 py-4 font-medium">
                             <img
-                              src="https://tecdn.b-cdn.net/img/new/avatars/2.webp"
+                              src={`http://localhost:4000/uploads/VolunteerImage/${item.profileImage}`}
                               className="w-12 rounded-full"
                               alt="Avatar"
                             />

@@ -40,7 +40,7 @@ export default function Sidebar({ children }) {
               >
                 <div className="leading-4">
                   <h4 className="font-semibold">UserName</h4>
-                  <span className="text-xs text-gray-600">Email</span>
+                  
                 </div>
 
                 <button

@@ -7,7 +7,14 @@ app.use(cors());
 const multer = require("multer");
 const path = require("path");
 
-
+app.get("/AllJoinedDsh", async (req, res) => {
+  try {
+    const getData = await JoinedModel.find();
+    res.send(getData);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 app.get("/AllJoined:Org", async (req, res) => {
     try {
@@ -17,6 +24,8 @@ app.get("/AllJoined:Org", async (req, res) => {
       res.status(500).json({ error: err.message });
     }
   });
+
+  
 
 
   const imageLocation = multer.diskStorage({

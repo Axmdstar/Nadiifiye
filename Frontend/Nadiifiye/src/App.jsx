@@ -5,6 +5,7 @@ import {
   RouterProvider,
   createRoutesFromElements,
 } from "react-router-dom";
+
 import HomeLayout from "./Pages/Layout/HomeLayout";
 import HomePage from "./Pages/HomePage";
 import AdminDashBoardLayout from "./Pages/Layout/AdminDashBdLayOut";
@@ -15,6 +16,12 @@ import VolunteersPage from "./Pages/Volunteers";
 import OrganizerDshBLayout from "./Pages/Layout/OrganizerDashBdLayout";
 import OrgCampaigns from "./Pages/OrgCampaigns";
 import OrgVolunteer from "./Pages/OrgVoluntees";
+import RegisterLayout from "./Pages/Layout/RegisterLayout";
+import Register from "./components/Register";
+import Login from "./components/Login";
+import ForgotPassword from "./components/ForgetPassword";
+
+
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -31,12 +38,20 @@ const Router = createBrowserRouter(
         <Route path='Organizer' element={<OrganizerPage />} />
         <Route path='Campaigns' element={<CampainsPage />} />
         <Route path='Volunteers' element={<VolunteersPage />} />
-        {/* <Route path='Reporting' element={< />} /> */}
+        
       </Route>
 
       <Route path="Organizer" element={<OrganizerDshBLayout />}>
         <Route index element={<OrgCampaigns/>} />
         <Route path="Volunteer" element={<OrgVolunteer />} />
+      </Route>
+
+
+
+      <Route path="Register" element={<RegisterLayout />}>
+        <Route index element={<Register />} />
+        <Route path="login" element={<Login />} />
+        <Route path="forgot-password" element={<ForgotPassword />} />
       </Route>
       
     </Route>
