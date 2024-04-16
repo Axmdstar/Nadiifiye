@@ -171,18 +171,6 @@ app.get("/total", async (req, res) => {
 });
 
 
-
-
-
-
-
-
-
-
-
-
-
-
 //show last 2 added campaigns
 app.get("/lastTwoCampaigns", async (req, res) => {
   try {
@@ -195,4 +183,36 @@ app.get("/lastTwoCampaigns", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+
+
+// finished campaigns count
+app.get("/finishedCampaigns", async (req, res) => {
+  try {
+    const finishedCampaignsCount = await CampaignsModel.aggregate([
+      {
+        $match: { $expr: { $eq: ['$currentNumOfPeople', '$NumOfPeople'] } }
+      },
+      {
+        $count: "totalFinishedCampaigns"
+      }
+    ]);
+    if (finishedCampaignsCount.length > 0) {
+      res.send({ totalFinishedCampaigns: finishedCampaignsCount[0].totalFinishedCampaigns });
+    } else {
+      res.send({ totalFinishedCampaigns: 0 }); // No finished campaigns found
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
+
+
+
+
+
+
 module.exports = app;
