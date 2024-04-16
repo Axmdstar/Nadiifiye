@@ -48,11 +48,13 @@ app.post("/addCampaign", uploadimg.single("Image"), async (req, res) => {
   try {
     const newData = new CampaignsModel({
       Name: req.body.Name,
+      Description: req.body.Description,
       Organizer: req.body.Organizer,
       Location: req.body.Location,
       DateTime: req.body.DateTime,
       Type: req.body.Type,
       NumOfPeople: req.body.NumOfPeople,
+      currentNumOfPeople:req.body.currentNumOfPeople,
       Image: req.file.filename,
     });
     const saveData = await newData.save();
@@ -64,6 +66,7 @@ app.post("/addCampaign", uploadimg.single("Image"), async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 //update campaigns
 app.put("/update/:id", async (req, res) => {
@@ -144,6 +147,7 @@ app.get("/total", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+<<<<<<< HEAD
 // finished campaigns count
 app.get("/finishedCampaigns", async (req, res) => {
   try {
@@ -164,6 +168,20 @@ app.get("/finishedCampaigns", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> 41d5eecd16d3d9dda1d2d272a66578b5a149a0fd
 
 //show last 2 added campaigns
 app.get("/lastTwoCampaigns", async (req, res) => {

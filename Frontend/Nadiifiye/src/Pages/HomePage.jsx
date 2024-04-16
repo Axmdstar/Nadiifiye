@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import imagehero from "../assets/images/img.png";
+import "../../public/style.css";
 import about from "../assets/images/about.png";
 import search from "../assets/images/Search.png";
 import mission from "../assets/images/mission.png";
@@ -135,10 +136,10 @@ export default function Home() {
       <div className="container hero">
         <div className="row align-items-center ">
           <div className="col-lg-6 herotext">
-            <h1 style={{ fontWeight: "800", fontFamily: "serif" }}>
+            <h1 className="mb-3" style={{ fontWeight: "800", fontFamily: "serif" }}>
               Make a Difference: Join Our Clean-<br></br>Up Campaigns
             </h1>
-            <p>
+            <p className="mb-3">
               Together, we can create cleaner, healthier communities by
               volunteering for our <br></br>environmental clean-up events. Your
               participation not only contributes to tangible <br></br>changes
@@ -146,7 +147,7 @@ export default function Home() {
               and join us in <br></br>our commitment to building a brighter,
               cleaner future for generations to come.
             </p>
-            <Link to="campaigns" className="btn button">
+            <Link to="campaigns" className="btn button mt-4">
               Get Started
             </Link>
           </div>
@@ -295,6 +296,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+
       {/* Compaigns */}
       <div className="container my-5 py-5">
         <h1 className="fw-bolder pb-5 recentcamp" style={{fontSize:"30px",marginLeft:"125px"}}>Recent Campaigns</h1>
