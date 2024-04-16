@@ -1,7 +1,7 @@
 const express = require('express');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
+const User = require('../models/User'); 
 const crypto = require('crypto');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
@@ -16,9 +16,9 @@ app.use(cors());
 // User Registration
 app.post("/register", async (req, res) => {
   const { username, email, password, userType } = req.body;
-
+  console.log('req.body :>> ', req.body);
   try {
-    let user = await User.findOne({ email });
+    let user = await User.findOne({ email }); 
     if (user) return res.status(400).json({ msg: "User already exists" });
 
     user = new User({ username, email, password, userType });

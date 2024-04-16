@@ -23,6 +23,10 @@ const JoinedModel = mongoose.Schema({
     VolunteerName: {
         type: String,
         required: true,
+    },
+    Attended:{
+        type: Boolean,
+        default: false
     }
 },{ timestamps: true }
 )

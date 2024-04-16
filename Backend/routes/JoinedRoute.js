@@ -25,7 +25,23 @@ app.get("/AllJoined:Org", async (req, res) => {
     }
   });
 
-  
+app.patch("/Attended/:Vid/:Jid", async (req, res) => {
+  try {
+    const updataAttd = await JoinedModel.findOneAndUpdate(
+      {VolunteerId: req.params.Vid,_id: req.params.Jid},
+      {Attended: true});
+    console.log('updataAttd :>> ', updataAttd);
+    if (!updataAttd) {
+      return res.status(404).json({ message: "Document not found" });
+    }
+    
+
+    res.status(200).json({message: "success"})
+
+  } catch (err) {
+    res.status(500).json({error: err.message});
+  }
+})
 
 
   const imageLocation = multer.diskStorage({
