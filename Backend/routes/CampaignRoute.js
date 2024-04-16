@@ -83,15 +83,6 @@ app.put("/update/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
-
-
-
-
-
-
-
 // campaign current num of peaple
 app.patch("/Join/:id", async (req, res) => {
   try {
@@ -121,13 +112,6 @@ app.patch("/Join/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
-
-
-
-
-
 //delete campaings
 app.delete("/delete/:id", async (req, res) => {
   try {
@@ -143,8 +127,6 @@ app.delete("/delete/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
 app.get("/OrgCampaign/:Organizer", async (req, res) => {
   try {
     const OrgCampaigns = await CampaignsModel.find({Organizer: req.params.Organizer});
@@ -153,10 +135,6 @@ app.get("/OrgCampaign/:Organizer", async (req, res) => {
     res.status(500).json({err: error.message})
   }
 })
-
-
-
-
 // total Campaigns
 app.get("/total", async (req, res) => {
   try {
@@ -166,48 +144,6 @@ app.get("/total", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-// campaign current num of peaple
-app.patch("/Join/:id", async (req, res) => {
-  try {
-    const campaignId = req.params.id;
-    const campaign = await CampaignsModel.findById(campaignId);
-
-    if (!campaign) {
-      return res.status(404).json({ error: "Campaign not found" });
-    }
-
-    // Check if the campaign has ended
-    if (campaign.currentNumOfPeople >= campaign.NumOfPeople) {
-      return res.status(400).json({ error: "Campaign has ended" });
-    }
-
-    // Increment the currentNumOfPeople col
-    campaign.currentNumOfPeople += 1;
-    await campaign.save();
-
-    res.json({
-      status: "success",
-      message: "Campaign joined successfully",
-      currentNumOfPeople: campaign.currentNumOfPeople,
-      NumOfPeople: campaign.NumOfPeople,
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-
 // finished campaigns count
 app.get("/finishedCampaigns", async (req, res) => {
   try {
@@ -228,7 +164,6 @@ app.get("/finishedCampaigns", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
 
 //show last 2 added campaigns
 app.get("/lastTwoCampaigns", async (req, res) => {

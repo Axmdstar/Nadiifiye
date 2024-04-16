@@ -35,17 +35,17 @@ export default function Contact() {
   }, []); // Empty dependency array to run the effect only once
 
   return (
-    <div className="container my-5 contact">
-      <h1 className="fw-bold">Contact us</h1>
-      <p>
-        Thank you for visiting our website! If you have any questions, <br></br>feedback,
-        or inquiries, please feel free to Contact us.
+    <div className="container my-5 py-5  contact ">
+      <h1 className="fw-bold fs-1">Contact us</h1>
+      <p className="contactp">
+        Thank you for visiting our website! If you have any questions, <br></br>
+        feedback, or inquiries, please feel free to Contact us.
       </p>
       <hr className="white-line-contact"></hr>
       <div className="container d-flex this">
         <div className="location">
           <div className="col">
-            <div className="d-flex align-items-center ">
+            <div className="d-flex align-items-center my-3">
               <FaMapMarkerAlt
                 className="p-2 fs-1 "
                 style={{
@@ -56,10 +56,10 @@ export default function Contact() {
               />
               <div className="mx-4">
                 <h5>Address</h5>
-                <p style={{ marginTop: "-10px" }}>Taalax, Mogadishu, Somalia</p>
+                <p>Taalax, Mogadishu, Somalia</p>
               </div>
             </div>
-            <div className="d-flex">
+            <div className="d-flex my-3">
               <FaEnvelope
                 className="p-2 fs-1 "
                 style={{
@@ -70,10 +70,10 @@ export default function Contact() {
               />
               <div className="mx-4">
                 <h5>Email</h5>
-                <p style={{ marginTop: "-10px" }}>info@nadiifiye.org</p>
+                <p>info@nadiifiye.org</p>
               </div>
             </div>
-            <div className="d-flex">
+            <div className="d-flex my-3">
               <FaPhone
                 className="p-2 fs-1 "
                 style={{
@@ -84,20 +84,27 @@ export default function Contact() {
               />
               <div className="mx-4">
                 <h5>Phone</h5>
-                <p style={{ marginTop: "-10px" }}>+1 123-456-7890</p>
+                <p>+1 123-456-7890</p>
               </div>
             </div>
           </div>
           <div className="row map" style={{ height: "380px", width: "500px" }}>
             <div className="map2">
               <h2>Location</h2>
-              <div className="mapp" id="map" style={{ height: "260px", width: "630px" }}></div>
+              <div
+                className="mapp"
+                id="map"
+                style={{ height: "260px", width: "630px" }}
+              ></div>
             </div>
           </div>
         </div>
         <div>
-          <div className="contactform" style={{ marginLeft: "280px",marginTop: "-130px" }}>
-            <h1 className="fw-bolder">Send Message:</h1>
+          <div
+            className="contactform"
+            style={{ marginLeft: "300px", marginTop: "-100px" }}
+          >
+            <h1 className="fw-bolder fs-2 pb-3">Send Message:</h1>
             <div
               style={{
                 border: "1px solid #c5c5c5",
@@ -115,9 +122,7 @@ export default function Contact() {
                   paddingBottom: "10px",
                 }}
               >
-                <label className="text-white fw-bold " >
-                  Name:
-                </label>
+                <label className="text-white fw-bold ">Name:</label>
                 <input
                   type="text"
                   id="name"
@@ -136,7 +141,6 @@ export default function Contact() {
                   className="form-control"
                   name="email"
                   required
-                  
                 />
                 <br></br>
                 <label className="text-white fw-bold " htmlFor="email">
@@ -148,7 +152,6 @@ export default function Contact() {
                   className="form-control"
                   name="subject"
                   required
-                  
                 />
                 <br></br>
                 <label className="text-white fw-bold " htmlFor="description">
@@ -161,7 +164,6 @@ export default function Contact() {
                   rows="5"
                   cols="30"
                   required
-                  
                 ></textarea>
                 <input
                   type="submit"
@@ -177,4 +179,3 @@ export default function Contact() {
     </div>
   );
 }
-
