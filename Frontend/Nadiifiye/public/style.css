@@ -97,9 +97,21 @@
 }
 
 .counter-item {
-  padding-right: 10px;
+  width:200px;
+  height:150px;
+  background-color:rgb(185, 244, 186);
+  box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.15);
+  border:1px solid gray;
+  border-radius:8px;
+  justify-content:center;
+  padding-top:30px;
 }
-
+.counter-item h1{
+  color:black;
+}
+.counter-item p{
+  color:rgb(96, 96, 96);
+}
 /* Partnership */
 .logo-slider-container {
   overflow: hidden;

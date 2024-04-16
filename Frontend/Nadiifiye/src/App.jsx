@@ -1,4 +1,3 @@
-
 import "./App.css";
 import {
   Route,
@@ -21,48 +20,39 @@ import RegisterLayout from "./Pages/Layout/RegisterLayout";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import ForgotPassword from "./components/ForgetPassword";
-import  Campaign  from "./Pages/Campaign";
-import Contact from "./Pages/Contact"
+import Campaign from "./Pages/Campaign";
+import Contact from "./Pages/Contact";
 import OrgUpdate from "./Pages/OrgUpdate";
-
-
-
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
     // Missing errorElement={<>}
     // Loader Function loader={}
-    <Route path="/" >
-
+    <Route path="/">
       <Route path="Home" element={<HomeLayout />}>
         <Route index element={<HomePage />} />
-        <Route path="contact" element={<Contact />} /> 
+        <Route path="contact" element={<Contact />} />
         <Route path="campaigns" element={<Campaign />} />
       </Route>
-      
 
       <Route path="Admin" element={<AdminDashBoardLayout />}>
         <Route index element={<AdminDashBoard />} />
-        <Route path='Organizer' element={<OrganizerPage />} />
-        <Route path='Campaigns' element={<CampainsPage />} />
-        <Route path='Volunteers' element={<VolunteersPage />} />
-        <Route path='updateOrg/:id' element={<OrgUpdate />} />
+        <Route path="Organizer" element={<OrganizerPage />} />
+        <Route path="Campaigns" element={<CampainsPage />} />
+        <Route path="Volunteers" element={<VolunteersPage />} />
+        <Route path="updateOrg/:id" element={<OrgUpdate />} />
       </Route>
-
 
       <Route path="Organizer" element={<OrganizerDshBLayout />}>
-        <Route index element={<OrgCampaigns/>} />
+        <Route index element={<OrgCampaigns />} />
         <Route path="Volunteer" element={<OrgVolunteer />} />
       </Route>
-
-
 
       <Route path="Register" element={<RegisterLayout />}>
         <Route index element={<Register />} />
         <Route path="login" element={<Login />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
       </Route>
-      
     </Route>
   )
 );

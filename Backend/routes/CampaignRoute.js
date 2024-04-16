@@ -86,15 +86,6 @@ app.put("/update/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
-
-
-
-
-
-
-
 // campaign current num of peaple
 app.patch("/Join/:id", async (req, res) => {
   try {
@@ -124,13 +115,6 @@ app.patch("/Join/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
-
-
-
-
-
 //delete campaings
 app.delete("/delete/:id", async (req, res) => {
   try {
@@ -146,8 +130,6 @@ app.delete("/delete/:id", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
 app.get("/OrgCampaign/:Organizer", async (req, res) => {
   try {
     const OrgCampaigns = await CampaignsModel.find({Organizer: req.params.Organizer});
@@ -156,10 +138,6 @@ app.get("/OrgCampaign/:Organizer", async (req, res) => {
     res.status(500).json({err: error.message})
   }
 })
-
-
-
-
 // total Campaigns
 app.get("/total", async (req, res) => {
   try {
@@ -169,6 +147,19 @@ app.get("/total", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 //show last 2 added campaigns

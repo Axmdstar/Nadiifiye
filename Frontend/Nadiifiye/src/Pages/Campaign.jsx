@@ -143,7 +143,7 @@ export default function Campaign() {
       <div className="container my-5">
         <div className="row">
           {sortedCampaigns.map((campaign) => (
-            <div className="col-lg-4" key={campaign._id}>
+            <div className="col-lg-4 p-4" key={campaign._id}>
             <div className="blackbox">
               <div className="service">
                 <div className="iconbox">
@@ -176,7 +176,7 @@ export default function Campaign() {
                           }
                         )}
                     </p>
-                    <ul className="fw-bold" style={{ fontSize: "10px" }}>
+                    <ul className="fw-bold" style={{ fontSize: "12px", marginLeft:"15px"}}>
                         <li>{campaign.Location}</li>
                     </ul>
                   </div>
@@ -190,7 +190,7 @@ export default function Campaign() {
                     <p>{campaign.Description}</p>
                   </div>
                 </div>
-                <div className="row" style={{ marginTop: "40px" }}>
+                <div className="row" style={{ marginTop: "40px",marginLeft:"3px" }}>
                 <div className="col-lg-6">
                     <ProgressBar
                       now={

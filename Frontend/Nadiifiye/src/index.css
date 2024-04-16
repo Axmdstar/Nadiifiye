@@ -1,68 +1,396 @@
-/* :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+* {
   margin: 0;
+  padding: 0;
+}
+.header {
+  background-color: rgb(248, 248, 248);
+  border-bottom: 1px solid rgb(226, 224, 224);
+  padding: 16px 50px;
   display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: space-between;
+  color: white;
+  font-family: monospace;
+  align-items: center;
+}
+.header h1 img {
+  width: 110px;
+  height: 75px;
+  margin-left: 50px;
+}
+.header ul {
+  display: flex;
+  gap: 35px;
+}
+.header ul li {
+  list-style: none;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 10px;
+}
+.header a {
+  text-decoration: none;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+}
+.header a:hover {
+  text-decoration: none;
+  color: rgb(87, 86, 86);
+  font-weight: bold;
+}
+.header ul .btn {
+  background-color: #28a745;
+  text-decoration: none;
+  padding: 10px;
+  width: 120px;
+  height: 50px;
+  font-size: 20px;
+  border-radius: 5px;
+  color: white;
+  align-items: center;
+  color: white;
+}
+.header .btn:hover {
+  background-color: #35da5b;
+  color: white;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* hero section */
+.hero {
+  margin-top: -20px;
+  padding-left: 60px;
+}
+.hero .button {
+  background-color: #221050;
+  padding: 10px;
+  width: 150px;
+  height: 50px;
+  font-family: serif;
+  font-size: 20px;
+  border-radius: 5px;
+  color: white;
+  margin-top: 15px;
+}
+.hero .button:hover {
+  background-color: transparent;
+  border: 2px solid #221050;
+  color: black;
+  padding: 10px;
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+  border-radius: 5px;
+}
+.hero .herotext h1 {
+  font-size: 40px;
+}
+.hero .herotext p {
+  padding-top: 20px;
+}
+/* section */
+.counters-container {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  align-items: center;
+  margin-top: 20px;
 }
 
-button {
+.counter-item {
+  width: 200px;
+  height: 150px;
+  background-color: rgb(185, 244, 186);
+  box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.15);
+  border: 1px solid gray;
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
+  justify-content: center;
+  padding-top: 30px;
 }
-button:hover {
-  border-color: #646cff;
+.counter-item h1 {
+  color: black;
+  font-size: 40px;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+.counter-item p {
+  color: rgb(96, 96, 96);
+}
+/* Partnership */
+.logo-slider-container {
+  overflow: hidden;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.logo-slider {
+  display: flex;
+  animation: slideRight 20s linear infinite;
+}
+.logo-item {
+  margin-right: 20px;
+}
+.logo-item img {
+  display: inline-block;
+  max-width: 100%;
+}
+/* campaigns */
+.service {
+  padding: 28px;
+  display: flex;
+  background-color: #ffffff;
+  margin-bottom: 30px;
+  margin-top: 10px;
+}
+.blackbox {
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.15);
+  border: 1px solid #eeecec;
+  border-radius: 8px;
+}
+.iconbox {
+  height: 18px;
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  margin-right: 90px;
+  margin-top: 35px;
+}
+.iconbox img {
+  height: 100px;
+  width: 100px;
+  margin-left: 10px;
+}
+/* Footer styling */
+.logofooter {
+  margin-left: 35px;
+}
+.foter {
+  background-color: #11072b;
+  padding: 10px;
+}
+
+.footer a {
+  color: #777;
+  transition: color 0.3s;
+}
+
+.footer a:hover {
+  color: #333;
+}
+.white-line {
+  border: 0;
+  height: 2px;
+  background-color: white;
+}
+.foter .social-icons {
+  display: flex;
+  margin-left: 95px;
+  margin-top: 20px;
+  padding: 0 0 20px 0;
+}
+.foter .social-icons a {
+  align-items: center;
+  background-color: #ffffff;
+  border-radius: 5px;
+  padding: 10px;
+  text-decoration: none;
+  color: #1877f2;
+  margin-right: 10px;
+}
+/* scroll-to-top */
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000; /* Ensure it appears above other content */
+}
+
+.scroll-button {
+  background-color: #1c1352;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  cursor: pointer;
+  align-items: center;
+  box-shadow: 5px 10px 15px rgba(102, 100, 100, 0.15);
+  padding-left: 10px;
+  padding-top: 5px;
+}
+
+.scroll-button:hover {
+  background-color: #218838;
+}
+/* campaign page */
+.search-sort {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.search-sort input[type="text"] {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px; /* Adjust margin as needed */
+  flex: 1; /* Take up remaining space */
+}
+
+.search-sort select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.sort-btn {
+  padding: 5px;
+  background-color: #f6f5f5;
+  width: 50px;
+  height: 43px;
+  margin-left: 15px;
+  border: 1px solid rgb(226, 226, 230);
+  border-radius: 3px;
+}
+.white-line-contact {
+  border: 0;
+  height: 2px;
+  background-color: rgb(0, 0, 0);
+  width: 240px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+/* responsivenes */
+.AiOutlineMenu {
+  font-size: 60px;
+  font-weight: 800;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  display: none !important;
+  color: rgb(248, 248, 248);
+}
+.AiOutlineClose {
+  font-size: 60px;
+  font-weight: 800;
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  cursor: pointer;
+  display: none !important;
+  color: rgb(248, 248, 248);
+}
+.contact {
+  padding-left: 100px;
+}
+@media screen and (max-width: 600px) {
+  .header ul {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 10px;
+    margin-top: 30px;
   }
-  a:hover {
-    color: #747bff;
+  .header {
+    padding: 70px 30px;
   }
-  button {
-    background-color: #f9f9f9;
+
+  .header h1 {
+    font-style: normal;
+    font-weight: bold;
+    position: absolute;
+    left: 20px;
+    top: 25px;
   }
-} */
+  .AiOutlineMenu {
+    font-size: 30px;
+    font-weight: 800;
+    cursor: pointer;
+    color: #218838;
+    display: block !important;
+    margin-top: 20px;
+  }
+  .AiOutlineClose {
+    font-size: 30px;
+    font-weight: 800;
+    cursor: pointer;
+    position: absolute;
+    right: 15px;
+    margin-top: 20px;
+    display: none;
+    color: #218838;
+  }
+  .herotext {
+    margin-left: -30px;
+  }
+  .herotext h1 {
+    padding-top: 30px;
+  }
+  .hero img {
+    display: none !important;
+  }
+  .hero {
+    margin-bottom: 30px !important;
+  }
+  .counters-container {
+    display: block;
+    justify-content: center;
+    align-items: center;
+    margin-left: 50px;
+  }
+  .counter-item {
+    margin-bottom: 10px;
+  }
+  .recentcamp {
+    margin-left: 0px !important;
+  }
+  .abot img {
+    width: 320px !important;
+    height: 400px;
+    margin-left: 8px;
+    margin-bottom: 50px;
+  }
+
+  .foter {
+    height: fit-content;
+    padding-top: 100px;
+  }
+  .looo {
+    display: none;
+  }
+  .logotxt {
+    display: none;
+  }
+  .foter .subs {
+    margin-left: -200px !important;
+    margin-top: -100px !important;
+    position: absolute;
+    display: inline;
+  }
+  .foter .social-icons {
+    margin-top: 30px !important;
+  }
+  .white-line {
+    margin-top: 30px !important;
+  }
+
+  .campaign .campHeader {
+    display: block !important;
+  }
+  .campaign .campHeader .search-sort {
+    margin-top: 20px !important;
+  }
+  .contact {
+    padding-left: 10px !important;
+  }
+  .contactp{
+    padding-top: 10px;
+    font-size: 12px;
+  }
+
+  .contact .this .location .map .map2 .mapp {
+    width: 330px !important;
+    height: 370px !important;
+  } 
+}
