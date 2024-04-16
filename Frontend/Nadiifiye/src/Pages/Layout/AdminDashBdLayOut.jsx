@@ -15,7 +15,7 @@ const AdminDashBoardLayout = () => {
         <div className="flex">
         <Sidebar className="">
           <NavLink to={"../Admin"}>
-            <SidebarItem icon={<LayoutDashboard size={20} />} text="Volunteers" active={ CurrentPath === "volunteers" ? true : false} />
+            <SidebarItem icon={<LayoutDashboard size={20} />} text="DashBoard" active={ CurrentPath === "volunteers" ? true : false} />
           </NavLink>
 
           <NavLink to={"Organizer"}>
