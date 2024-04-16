@@ -2,7 +2,7 @@
 
 import React, { createContext, useState, useContext } from 'react';
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(false);
@@ -10,8 +10,9 @@ export const AuthProvider = ({ children }) => {
   const [userId, setUserId] = useState('12345');
   const [usrType, setusrType] = useState('');
 
+
   return (
-    <AuthContext.Provider value={{ auth, userName, userId, setAuth, setUserName, setUserId }}>
+    <AuthContext.Provider value={{usrType, setusrType, auth, userName, userId, setAuth, setUserName, setUserId }}>
       {children}
     </AuthContext.Provider>
   );

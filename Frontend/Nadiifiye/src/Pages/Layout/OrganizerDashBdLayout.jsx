@@ -2,6 +2,7 @@ import {Outlet} from "react-router-dom";
 import { ClipboardList, Users} from "lucide-react";
 import Sidebar,{SidebarItem} from "../../components/Sidebar";
 import { useLocation, NavLink } from "react-router-dom";
+import { AuthContext, useAuth } from '../../utility/UserContext';
 
 
 const OrganizerDshBLayout = () => {
@@ -12,7 +13,7 @@ const OrganizerDshBLayout = () => {
     return ( 
         
         <div className="flex">
-        <Sidebar className="">
+        <Sidebar className="h-auto" >
 
           <NavLink to={"../Organizer"}>
             <SidebarItem icon={<ClipboardList size={20} />} text="Campaigns"  />
