@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../utility/UserContext';
+
+
 
 function Login() {
+  // user info 
+  const { setAuth, setUserName, setUserId, userId } = useAuth();
   const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
   const { email, password } = formData;
 
+  console.log(userId);
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const onSubmit = async e => {
