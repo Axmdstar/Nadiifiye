@@ -23,6 +23,7 @@ import Login from "./components/Login";
 import ForgotPassword from "./components/ForgetPassword";
 import  Campaign  from "./Pages/Campaign";
 import Contact from "./Pages/Contact"
+import OrgUpdate from "./Pages/OrgUpdate";
 
 
 
@@ -45,6 +46,7 @@ const Router = createBrowserRouter(
         <Route path='Organizer' element={<OrganizerPage />} />
         <Route path='Campaigns' element={<CampainsPage />} />
         <Route path='Volunteers' element={<VolunteersPage />} />
+        <Route path='updateOrg/:id' element={<OrgUpdate />} />
       </Route>
 
 

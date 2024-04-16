@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import useFetch from "../utility/UseFetch";
-import { Trash2, Edit} from "lucide-react";
+import { Trash2, Edit, Plus} from "lucide-react";
 
-import { Plus } from "lucide-react"
+
 import { Link } from "react-router-dom";
 
 // import { DeleteBtn } from "../components/buttons";
