@@ -7,26 +7,26 @@ export default function Footer() {
   return (
     <div className="container-fluid foter list">
       <div className="row text-center d-flex my-4 pt-2">
-        <div className="col-4 ">
+        <div className="col-4 looo">
           <div className="logofooter">
             <img
               src={logo}
               alt="logo"
               width={350}
               height={210}
-              style={{ marginTop: "-30px", marginLeft: "-40px" }}
+              style={{ marginTop: "-100px", }}
             />
           </div>
         </div>
-        <div className="col-8 subs" style={{ marginLeft: "-45px" }}>
+        <div className="col-8 subs" style={{ marginLeft: "-30px" }}>
           <div className="text-white py-4 substext">
-            <h5 className="text-center fw-bold ">
+            <h5 className="text-center fw-bolder fs-4   ">
               Subscribe to our Newsletter
             </h5>
           </div>
           <div
             className="form-group col-4 py-4 d-flex gap-2 "
-            style={{ marginLeft: "365px", marginTop: "-30px" }}
+            style={{ marginLeft: "340px", marginTop: "-30px" }}
           >
             <input
               type="email"
@@ -40,28 +40,19 @@ export default function Footer() {
       <div className="row">
         <div className="col-lg-6">
           <p
-            className="footertext text-white px-5 mx-5 "
-            style={{ marginTop: "-45px", marginLeft: "30px" }}
+            className=" text-white px-5 mx-5 logotxt"
+            style={{ marginTop: "-80px" }}
           >
             Nadiifiye System, join us in our mission to preserve nature's beauty
             and safeguard our planet. Together, let's make a meaningful impact
             and inspire generations to come. Nadiifiye System - Transforming
             today for a cleaner, greener tomorrow.
           </p>
-          <div className="social-icons  mt-2" style={{marginLeft:"90px"}}>
+          <div className="social-icons">
             <a
               href="https://www.facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                alignItems: 'center',
-                backgroundColor: '#FFFFFF',
-                borderRadius: '5px',
-                padding: '5px 10px 10px 10px',
-                textDecoration: 'none',
-                color: '#1877F2',
-                marginRight:"10px"
-              }}
             >
               <FaFacebook />
             </a>
@@ -69,15 +60,6 @@ export default function Footer() {
               href="https://www.facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                alignItems: 'center',
-                backgroundColor: '#FFFFFF',
-                borderRadius: '5px',
-                padding: '5px 10px 10px 10px',
-                textDecoration: 'none',
-                color: '#25D366', 
-                marginRight:"10px"
-              }}
             >
               <FaWhatsapp />
             </a>
@@ -85,15 +67,6 @@ export default function Footer() {
               href="https://twitter.com"
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                alignItems: 'center',
-                backgroundColor: '#FFFFFF',
-                borderRadius: '5px',
-                padding: '5px 10px 10px 10px',
-                textDecoration: 'none',
-                color: '#1DA1F2', 
-                marginRight:"10px"
-              }}
             >
               <FaTwitter />
             </a>
@@ -101,15 +74,6 @@ export default function Footer() {
               href="https://www.instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                alignItems: 'center',
-                backgroundColor: '#FFFFFF',
-                borderRadius: '5px',
-                padding: '5px 10px 10px 10px',
-                textDecoration: 'none',
-                color: '#C13584', 
-                marginRight:"10px"
-              }}
             >
               <FaInstagram />
             </a>
@@ -117,7 +81,7 @@ export default function Footer() {
         </div>
         <div
           className="col-lg-3 text-white contactinfo"
-          style={{ marginLeft: "60px", marginTop: "-35px" }}
+          style={{ marginLeft: "60px", marginTop: "-110px" }}
         >
           <h3>Contact Info</h3>
           <ul>
@@ -129,7 +93,7 @@ export default function Footer() {
             </li>
           </ul>
         </div>
-        <div className="col-lg-2 text-white linkss" style={{ marginTop: "-35px" }}>
+        <div className="col-lg-2 text-white linkss" style={{  marginTop: "-110px", marginLeft: "-110px" }}>
           <ul>
             <li>Home</li>
             <li>About Us</li>
@@ -141,7 +105,7 @@ export default function Footer() {
         </div>
       </div>
       <hr className="white-line"></hr>
-      <div className="row">
+      <div className="row py-4">
         <div className=" col-12 justify-content-center align-items-center text-white text-center ">
           <p>
             &copy; 2024 Your Website. All rights reserved. | Designed by{" "}

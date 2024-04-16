@@ -1,21 +1,27 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/images/Nadii-01.png";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { useState } from "react";
 
-
 export default function Header() {
+  const navigate = useNavigate();
+
   const scrollToAbout = () => {
     const aboutSection = document.getElementById("about");
-    aboutSection.scrollIntoView({ behavior: "smooth" });
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: "smooth" });
+    } else {
+      navigate("/");
+      setTimeout(scrollToAbout, 500);
+    }
   };
+
   const [isOpnen, setIsOpen] = useState(false);
   const handelbtn = () => {
     setIsOpen(!isOpnen);
   };
   const handleMenuLinkClick = () => {
     console.log("Menu link clicked");
-    // Close the menu only if the screen width is less than 600px
     if (window.innerWidth <= 800) {
       setIsOpen(false); // Close the menu
       console.log("Menu closed");
@@ -36,12 +42,14 @@ export default function Header() {
         onClick={handelbtn}
         className="AiOutlineMenu"
       />
-      <ul style={{display:isOpnen ? "none" : "flex"}}>
+      <ul style={{ display: isOpnen ? "none" : "flex" }}>
         <li>
-          <Link to="/Home" onClick={handleMenuLinkClick}>Home</Link>
+          <Link to="/home" onClick={handleMenuLinkClick}>
+            Home
+          </Link>
         </li>
         <li>
-          <Link  onClick={scrollToAbout}>
+          <Link to="/home" onClick={scrollToAbout}>
             About
           </Link>
         </li>
@@ -49,13 +57,12 @@ export default function Header() {
           <Link to="./campaigns">Campaigns</Link>
         </li>
         <li>
-          <Link to="./contact" >Contact Us</Link>
+          <Link to="./contact">Contact Us</Link>
         </li>
-        <NavLink className="btn" style={{ backgroundColor: "#28a745" }} to="/Register">
-        Signup
-      </NavLink>
+        <NavLink  to="/Register" className="btn" style={{ backgroundColor: "#28a745" }} >
+          Signup
+        </NavLink>
       </ul>
-      
     </div>
   );
 }
