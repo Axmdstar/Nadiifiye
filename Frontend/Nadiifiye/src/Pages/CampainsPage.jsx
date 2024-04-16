@@ -56,7 +56,7 @@ const CampainsPage = () => {
                         Type
                       </th>
                       <th scope="col" className="px-6 py-4">
-                        No.Volunteers
+                        Volunteers
                       </th>
                     </tr>
                   </thead>
@@ -95,7 +95,7 @@ const CampainsPage = () => {
                             {item.Type}
                           </td>
                           <td className="whitespace-nowrap px-6 py-4">
-                            {item.NumOfPeople}
+                            {item.NumOfPeople}/{item.currentNumOfPeople}
                           </td>
                         </tr>
                       );

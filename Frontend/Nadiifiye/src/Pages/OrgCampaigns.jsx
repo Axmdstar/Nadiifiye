@@ -92,7 +92,7 @@ const OrgCampaigns = () => {
   
             <div className="flex flex-col">
             <div className="text-gray-600 ">
-              <p className="font-medium text-4xl py-5">New Campaign</p>
+              <p className="font-medium text-4xl py-4">New Campaign</p>
               <p>Please fill out all the fields.</p>
             </div>
   
@@ -122,7 +122,7 @@ const OrgCampaigns = () => {
                 </div>
   
                 <div className="md:col-span-2">
-                  <label >Number of Volunteers</label>
+                  <label className="font-medium" >No.Volunteers</label>
                   <input type="text"   className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"  placeholder="" 
                   onChange={(e) => setNumOfPeople(e.target.value)}
                   />
@@ -132,14 +132,11 @@ const OrgCampaigns = () => {
                 <label htmlFor="city">Date</label>
                     <DatePicker className="h-10 py-2 border mt-1 rounded px-4 w-full bg-gray-50" selected={startDate} onChange={(date) => setStartDate(date)} />
                 </div>
-
-                
-                
-  
                 </div>
                 
               {/* file */}
-              <div className="py-8">
+              <div className="py-3">
+                
                 <input type="file" name="image" id="image" 
                 onChange={(e) => setFile(e.target.files[0])}
                 />
@@ -178,14 +175,14 @@ const OrgCampaigns = () => {
         <h1 className="font-medium text-4xl py-5">My Campaigns</h1>
 
         {/* New Org btn  */}
-        <div className="  flex transition-all duration-100  ease-in-out w-12 hover:w-40">
-          <button className="bg-green-500 relative flex group w-full  text-white px-4 py-2  hover:bg-green-600 rounded-lg   "
-            onClick={() => setFormState(true)}
-          >
-            <Plus></Plus>
-            <span className="opacity-0 w-30 invisible group-hover:opacity-100 group-hover:visible absolute left-10 top-2 text-white z-10">New Campaign</span>
-          </button>
-        </div>
+        <div className="  flex transition-all duration-100  ease-in-out w-12 ">
+              <button
+                className="bg-green-500  w-full  text-white  py-2  hover:bg-green-600 rounded-lg"
+                onClick={() => setFormState(true)}
+              >
+                <Plus className="mx-auto"></Plus>
+              </button>
+            </div>
       </div>
 
       {/* table */}

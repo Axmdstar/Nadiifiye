@@ -2,7 +2,7 @@ import {Outlet} from "react-router-dom";
 import { ClipboardList, Users} from "lucide-react";
 import Sidebar,{SidebarItem} from "../../components/Sidebar";
 import { useLocation, NavLink } from "react-router-dom";
-import { UserContext } from "../../utility/UserContext";
+
 
 const OrganizerDshBLayout = () => {
   const location = useLocation();
@@ -10,7 +10,7 @@ const OrganizerDshBLayout = () => {
   console.log('CurrentPath :>> ', CurrentPath);
   
     return ( 
-        <UserContext.Provider value="">
+        
         <div className="flex">
         <Sidebar className="">
 
@@ -27,7 +27,7 @@ const OrganizerDshBLayout = () => {
         
         
       </div>
-        </UserContext.Provider>
+        
      );
 }
  
