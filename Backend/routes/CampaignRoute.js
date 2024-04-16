@@ -38,8 +38,6 @@ const imageLocation = multer.diskStorage({
     cb(null, "uploads/CampaignImage");
   },
   filename: (req, file, cb) => {
-    // console.log(file);
-    // cb(null, Date.now() +path.extname(file.originalname));
     cb(null, file.originalname);
   },
 });
@@ -86,6 +84,50 @@ app.put("/update/:id", async (req, res) => {
   }
 });
 
+
+
+
+
+
+
+
+
+// campaign current num of peaple
+app.patch("/Join/:id", async (req, res) => {
+  try {
+    const campaignId = req.params.id;
+    const campaign = await CampaignsModel.findById(campaignId);
+
+    if (!campaign) {
+      return res.status(404).json({ error: "Campaign not found" });
+    }
+
+    // Check if the campaign has ended
+    if (campaign.currentNumOfPeople >= campaign.NumOfPeople) {
+      return res.status(400).json({ error: "Campaign has ended" });
+    }
+
+    // Increment the currentNumOfPeople col
+    campaign.currentNumOfPeople += 1;
+    await campaign.save();
+
+    res.json({
+      status: "success",
+      message: "Campaign joined successfully",
+      currentNumOfPeople: campaign.currentNumOfPeople,
+      NumOfPeople: campaign.NumOfPeople,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+
+
+
+
+
 //delete campaings
 app.delete("/delete/:id", async (req, res) => {
   try {
@@ -102,6 +144,7 @@ app.delete("/delete/:id", async (req, res) => {
   }
 });
 
+
 app.get("/OrgCampaign/:Organizer", async (req, res) => {
   try {
     const OrgCampaigns = await CampaignsModel.find({Organizer: req.params.Organizer});
@@ -110,6 +153,9 @@ app.get("/OrgCampaign/:Organizer", async (req, res) => {
     res.status(500).json({err: error.message})
   }
 })
+
+
+
 
 // total Campaigns
 app.get("/total", async (req, res) => {
@@ -121,4 +167,79 @@ app.get("/total", async (req, res) => {
   }
 });
 
+
+
+
+
+
+
+
+
+
+
+// campaign current num of peaple
+app.patch("/Join/:id", async (req, res) => {
+  try {
+    const campaignId = req.params.id;
+    const campaign = await CampaignsModel.findById(campaignId);
+
+    if (!campaign) {
+      return res.status(404).json({ error: "Campaign not found" });
+    }
+
+    // Check if the campaign has ended
+    if (campaign.currentNumOfPeople >= campaign.NumOfPeople) {
+      return res.status(400).json({ error: "Campaign has ended" });
+    }
+
+    // Increment the currentNumOfPeople col
+    campaign.currentNumOfPeople += 1;
+    await campaign.save();
+
+    res.json({
+      status: "success",
+      message: "Campaign joined successfully",
+      currentNumOfPeople: campaign.currentNumOfPeople,
+      NumOfPeople: campaign.NumOfPeople,
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+// finished campaigns count
+app.get("/finishedCampaigns", async (req, res) => {
+  try {
+    const finishedCampaignsCount = await CampaignsModel.aggregate([
+      {
+        $match: { $expr: { $eq: ['$currentNumOfPeople', '$NumOfPeople'] } }
+      },
+      {
+        $count: "totalFinishedCampaigns"
+      }
+    ]);
+    if (finishedCampaignsCount.length > 0) {
+      res.send({ totalFinishedCampaigns: finishedCampaignsCount[0].totalFinishedCampaigns });
+    } else {
+      res.send({ totalFinishedCampaigns: 0 }); // No finished campaigns found
+    }
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
+//show last 2 added campaigns
+app.get("/lastTwoCampaigns", async (req, res) => {
+  try {
+    const lastTwoCampaigns = await CampaignsModel.find()
+      .sort({ DateTime: -1 }) // Sort by DateTime field in ascending order (1)
+      .limit(2); // Limit the result to 2 documents
+
+    res.send(lastTwoCampaigns);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 module.exports = app;

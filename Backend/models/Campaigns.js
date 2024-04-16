@@ -5,6 +5,10 @@ const CampaignsModel = mongoose.Schema({
     type: String,
     required: true,
   },
+  Description: {
+    type: String,
+    required: true,
+  },
   Organizer: {
     type: String,
     required: true,
@@ -24,6 +28,10 @@ const CampaignsModel = mongoose.Schema({
   NumOfPeople: {
     type: Number,
     required: true
+  },
+  currentNumOfPeople: {
+    type: Number,
+    default: 0
   },
   Image: {
     type: String,
