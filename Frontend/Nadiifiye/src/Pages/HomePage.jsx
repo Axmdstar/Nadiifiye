@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import imagehero from "../assets/images/img.png";
+import "../../public/style.css";
 import about from "../assets/images/about.png";
 import search from "../assets/images/Search.png";
 import mission from "../assets/images/mission.png";
@@ -199,6 +200,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+
       {/* Compaigns */}
       <div className="my-5" style={{ marginTop: "40px" }}>
         <p

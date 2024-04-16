@@ -7,6 +7,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import { BsArrowUp, BsArrowDown } from "react-icons/bs";
 import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
+import "../../public/style.css";
 
 export default function Campaign() {
   const endpoint = "http://localhost:4000" ;
