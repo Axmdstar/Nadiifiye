@@ -38,7 +38,7 @@ export default function Header() {
       />
       <ul style={{display:isOpnen ? "none" : "flex"}}>
         <li>
-          <Link to="/Home" onClick={handleMenuLinkClick}>Home</Link>
+          <Link to="/" onClick={handleMenuLinkClick}>Home</Link>
         </li>
         <li>
           <Link  onClick={scrollToAbout}>

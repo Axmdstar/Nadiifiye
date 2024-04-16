@@ -2,7 +2,7 @@ import {Outlet} from "react-router-dom";
 import { ClipboardList, Users,  LayoutDashboard, Stamp} from "lucide-react";
 import Sidebar,{SidebarItem} from "../../components/Sidebar";
 import { useLocation, NavLink } from "react-router-dom";
-import { UserContext } from "../../utility/UserContext";
+
 
 const AdminDashBoardLayout = () => {
   const location = useLocation();
@@ -11,7 +11,7 @@ const AdminDashBoardLayout = () => {
   
   
     return ( 
-        <UserContext.Provider value="">
+        
         <div className="flex">
         <Sidebar className="">
           <NavLink to={"../Admin"}>
@@ -40,7 +40,7 @@ const AdminDashBoardLayout = () => {
         
         
       </div>
-        </UserContext.Provider>
+        
      );
 }
  
