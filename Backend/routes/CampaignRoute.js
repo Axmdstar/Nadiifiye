@@ -48,11 +48,13 @@ app.post("/addCampaign", uploadimg.single("Image"), async (req, res) => {
   try {
     const newData = new CampaignsModel({
       Name: req.body.Name,
+      Description: req.body.Description,
       Organizer: req.body.Organizer,
       Location: req.body.Location,
       DateTime: req.body.DateTime,
       Type: req.body.Type,
       NumOfPeople: req.body.NumOfPeople,
+      currentNumOfPeople:req.body.currentNumOfPeople,
       Image: req.file.filename,
     });
     const saveData = await newData.save();
@@ -64,6 +66,7 @@ app.post("/addCampaign", uploadimg.single("Image"), async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 //update campaigns
 app.put("/update/:id", async (req, res) => {
@@ -177,57 +180,7 @@ app.get("/total", async (req, res) => {
 
 
 
-// campaign current num of peaple
-app.patch("/Join/:id", async (req, res) => {
-  try {
-    const campaignId = req.params.id;
-    const campaign = await CampaignsModel.findById(campaignId);
 
-    if (!campaign) {
-      return res.status(404).json({ error: "Campaign not found" });
-    }
-
-    // Check if the campaign has ended
-    if (campaign.currentNumOfPeople >= campaign.NumOfPeople) {
-      return res.status(400).json({ error: "Campaign has ended" });
-    }
-
-    // Increment the currentNumOfPeople col
-    campaign.currentNumOfPeople += 1;
-    await campaign.save();
-
-    res.json({
-      status: "success",
-      message: "Campaign joined successfully",
-      currentNumOfPeople: campaign.currentNumOfPeople,
-      NumOfPeople: campaign.NumOfPeople,
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-
-// finished campaigns count
-app.get("/finishedCampaigns", async (req, res) => {
-  try {
-    const finishedCampaignsCount = await CampaignsModel.aggregate([
-      {
-        $match: { $expr: { $eq: ['$currentNumOfPeople', '$NumOfPeople'] } }
-      },
-      {
-        $count: "totalFinishedCampaigns"
-      }
-    ]);
-    if (finishedCampaignsCount.length > 0) {
-      res.send({ totalFinishedCampaigns: finishedCampaignsCount[0].totalFinishedCampaigns });
-    } else {
-      res.send({ totalFinishedCampaigns: 0 }); // No finished campaigns found
-    }
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
 
 
 //show last 2 added campaigns
