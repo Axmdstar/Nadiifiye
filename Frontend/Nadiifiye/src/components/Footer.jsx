@@ -1,9 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../../public/style.css";
 import logo from "../assets/images/logo2.png";
 import { FaFacebook, FaTwitter, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
 export default function Footer() {
+  const [email, setEmail] = useState("");
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/subscription/subscribe",
+        {
+          email,
+        }
+      );
+      console.log(response.data);
+      // Reset email field after successful subscription
+      setEmail("");
+      toast.success("Successfully Subscribed");
+    } catch (error) {
+      console.error("Error subscribing:", error);
+      if (error.response && error.response.status === 400) {
+        toast.error("Email is already subscribed");
+      } else {
+        toast.error("Error while subscribing, try again");
+      }
+    }
+  };
   return (
     <div className="container-fluid foter list">
       <div className="row text-center d-flex my-4 pt-2">
@@ -14,7 +41,7 @@ export default function Footer() {
               alt="logo"
               width={350}
               height={210}
-              style={{ marginTop: "-100px", }}
+              style={{ marginTop: "-100px" }}
             />
           </div>
         </div>
@@ -28,12 +55,19 @@ export default function Footer() {
             className="form-group col-4 py-4 d-flex gap-2 "
             style={{ marginLeft: "340px", marginTop: "-30px" }}
           >
-            <input
-              type="email"
-              className="form-control p-2"
-              placeholder="Enter your email"
-            />
-            <button className="btn btn-success">Subscribe</button>
+            <form className="d-flex" onSubmit={handleSubscribe}>
+              <input
+                className="form-control p-2 mr-3"
+                type="email"
+                name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Enter your email"
+              />
+              <button className="btn btn-success" type="submit">
+                Subscribe
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -89,11 +123,15 @@ export default function Footer() {
             <li>landline: 141</li>
             <li>EMAIL: info@Nadiifiye.com</li>
             <li>
-              ADDRESS: Km4 Airport Road,<br></br> Wadajir District,<br></br> Mogadishu-Somalia
+              ADDRESS: Km4 Airport Road,<br></br> Wadajir District,<br></br>{" "}
+              Mogadishu-Somalia
             </li>
           </ul>
         </div>
-        <div className="col-lg-2 text-white linkss" style={{  marginTop: "-110px", marginLeft: "-110px" }}>
+        <div
+          className="col-lg-2 text-white linkss"
+          style={{ marginTop: "-110px", marginLeft: "-110px" }}
+        >
           <ul>
             <li>Home</li>
             <li>About Us</li>

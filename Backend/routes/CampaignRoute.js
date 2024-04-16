@@ -147,7 +147,6 @@ app.get("/total", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-<<<<<<< HEAD
 // finished campaigns count
 app.get("/finishedCampaigns", async (req, res) => {
   try {
@@ -168,20 +167,6 @@ app.get("/finishedCampaigns", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-=======
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> 41d5eecd16d3d9dda1d2d272a66578b5a149a0fd
 
 //show last 2 added campaigns
 app.get("/lastTwoCampaigns", async (req, res) => {
