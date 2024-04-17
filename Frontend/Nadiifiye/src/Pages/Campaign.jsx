@@ -5,7 +5,6 @@ import "react-toastify/dist/ReactToastify.css";
 import axios from "axios";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { BsArrowUp, BsArrowDown } from "react-icons/bs";
-import "react-toastify/dist/ReactToastify.css";
 import moment from "moment";
 import "../../public/style.css";
 import { Navigate, useNavigate} from "react-router-dom";
@@ -32,8 +31,6 @@ export default function Campaign() {
     fetchData();
   }, []);
 
-
-
   const handleSortChange = (e) => {
     setSortType(e.target.value);
     setSortDirection("asc");
@@ -44,10 +41,6 @@ export default function Campaign() {
       prevDirection === "asc" ? "desc" : "asc"
     );
   };
-
-
-
-
   const filteredCampaigns = campaigns.filter((campaign) =>
     campaign.Name.toLowerCase().includes(searchQuery.toLowerCase())
   );
@@ -72,9 +65,6 @@ export default function Campaign() {
 
 
   const handleJoinCampaign = async (id) => {
-    
-    
-    
     navigate(`../JoinForm/${id}`);
     
     try {
@@ -104,10 +94,6 @@ export default function Campaign() {
       toast.error("Error joining campaign");
     }
   };
-
-
-
-
 
   return (
     <div className="my-5 campaign" style={{ marginTop: "40px" }}>

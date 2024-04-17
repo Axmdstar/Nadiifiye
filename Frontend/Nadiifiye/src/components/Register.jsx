@@ -9,6 +9,7 @@ function Register() {
     password: '',
   });
   const [successMessage, setSuccessMessage] = useState(''); // State for success message
+  const [errorMessage, setErrorMessage] = useState(''); // State for error message
   const navigate = useNavigate();
 
   const { username, email, password } = formData;
@@ -30,6 +31,7 @@ function Register() {
   
       // If successful, set the success message
       setSuccessMessage('Successfully registered!');
+      setErrorMessage('');
   
       // Clear the success message after 3 seconds and reset form data
       setTimeout(() => {
@@ -45,8 +47,12 @@ function Register() {
   
     } catch (error) {
       // If there's an error, handle it here
-      console.error(error.response.data);
-      // Set error message if needed
+      if (error.response && error.response.data && error.response.data.msg) {
+        setErrorMessage(error.response.data.msg);
+      } else {
+        setErrorMessage('An error occurred. Please try again later.');
+      }
+      setSuccessMessage('');
     }
   };
   
@@ -56,6 +62,7 @@ function Register() {
       <div className="max-w-md w-full mx-auto bg-white p-8 border border-gray-300 rounded-lg shadow-lg">
         <h2 className="text-2xl font-bold text-center mb-8">Register</h2>
         {successMessage && <div className="text-center text-green-500">{successMessage}</div>}
+        {errorMessage && <div className="text-center text-red-500">{errorMessage}</div>}
         <form onSubmit={onSubmit} className="space-y-6">
           <div>
             <input
