@@ -1,7 +1,40 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FaMapMarkerAlt, FaEnvelope, FaPhone } from "react-icons/fa";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    description: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/contact/send_message",
+        formData
+      );
+      toast.success("message sent successfully");
+      // console.log(response.data); // Assuming backend sends a success message
+      // Reset form data after successful submission
+      setFormData({ name: "", email: "", subject: "", description: "" });
+    } catch (error) {
+      toast.success("Error sending message, please try again.");
+      console.error("Error sending message:", error);
+      
+      // display error message to user
+    }
+  };
+
   useEffect(() => {
     const googleMapsScript = document.createElement("script");
     googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=&librarie&callback=initMap`;
@@ -114,8 +147,9 @@ export default function Contact() {
               }}
             >
               <form
-                action="/send_message"
-                method="POST"
+                // action="/send_message"
+                onSubmit={handleSubmit}
+                // method="POST"
                 style={{
                   paddingLeft: "10px",
                   paddingRight: "10px",
@@ -129,6 +163,8 @@ export default function Contact() {
                   className="form-control name"
                   name="name"
                   required
+                  value={formData.name}
+                  onChange={handleChange}
                   style={{ width: "400px" }}
                 />
                 <br></br>
@@ -140,6 +176,8 @@ export default function Contact() {
                   id="email"
                   className="form-control"
                   name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   required
                 />
                 <br></br>
@@ -151,6 +189,8 @@ export default function Contact() {
                   id="subject"
                   className="form-control"
                   name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
                   required
                 />
                 <br></br>
@@ -163,6 +203,8 @@ export default function Contact() {
                   name="description"
                   rows="5"
                   cols="30"
+                  value={formData.description}
+                  onChange={handleChange}
                   required
                 ></textarea>
                 <input
@@ -176,6 +218,7 @@ export default function Contact() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 }

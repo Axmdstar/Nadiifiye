@@ -147,36 +147,6 @@ app.get("/total", async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//show last 2 added campaigns
-app.get("/lastTwoCampaigns", async (req, res) => {
-  try {
-    const lastTwoCampaigns = await CampaignsModel.find()
-      .sort({ DateTime: -1 }) // Sort by DateTime field in ascending order (1)
-      .limit(2); // Limit the result to 2 documents
-
-    res.send(lastTwoCampaigns);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
-
-
 // finished campaigns count
 app.get("/finishedCampaigns", async (req, res) => {
   try {
@@ -198,12 +168,16 @@ app.get("/finishedCampaigns", async (req, res) => {
   }
 });
 
+//show last 2 added campaigns
+app.get("/lastTwoCampaigns", async (req, res) => {
+  try {
+    const lastTwoCampaigns = await CampaignsModel.find()
+      .sort({ DateTime: -1 }) // Sort by DateTime field in ascending order (1)
+      .limit(2); // Limit the result to 2 documents
 
-
-
-
-
-
-
-
+    res.send(lastTwoCampaigns);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 module.exports = app;

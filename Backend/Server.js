@@ -15,6 +15,8 @@ const OrganizerRoute = require("./routes/OrganizerRoute");
 const JoinedRoute = require("./routes/JoinedRoute");
 const UserRoute = require("./routes/UserRoute")
 const DashBoardRoute = require("./routes/DashBoardRoute")
+const ContactMessageRoute = require("./routes/ContactRoute")
+const subscriptionRoutes = require("./routes/SubscriptionRout")
 
 app.use('/uploads', express.static('uploads'));
 
@@ -26,6 +28,9 @@ app.use("/Organizer", OrganizerRoute);
 app.use("/Joined", JoinedRoute)
 app.use("/UserInfo", UserRoute)
 app.use("/AdminDsh", DashBoardRoute)
+app.use("/contact", ContactMessageRoute)
+app.use('/subscription', subscriptionRoutes);
+
 
 // api protected
 app.get("/api/protected", authMiddleware, (req, res) => {
