@@ -47,7 +47,7 @@ export default function Header() {
           <Link to="/" onClick={handleMenuLinkClick}>Home</Link>
         </li>
         <li>
-          <Link to="/home" onClick={scrollToAbout}>
+          <Link to="/" onClick={scrollToAbout}>
             About
           </Link>
         </li>
