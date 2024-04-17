@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate, Link } from 'react-router-dom';
-import { useAuth } from '../utility/UserContext';
+import {  AuthContext } from '../utility/UserContext';
+
 
 
 
 function Login() {
   // user info 
-  const { setAuth, setUserName, setUserId, userId } = useAuth();
+  const { setAuth, setUserName, setUserId, userId, setusrType  } = useContext(AuthContext);
   const [formData, setFormData] = useState({ email: '', password: '' });
   const navigate = useNavigate();
   const { email, password } = formData;
@@ -15,21 +16,37 @@ function Login() {
   console.log(userId);
   const onChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = async e => {
+  const onSubmit =  (e) => {
     e.preventDefault();
-    try {
-     await axios.post('http://localhost:4000/auth/login', {
-        email: email,
-        password: password,
-      });
-      
-      // Assuming the response includes a token you might want to store for future requests
-      // localStorage.setItem('token', response.data.token);
 
-      // On successful login, redirect to the Home page
-      navigate('/home');
+    try {
+      axios.post('http://localhost:4000/auth/login', {
+        email: email,
+        password: password})
+        .then(({data}) => {
+          console.log(data);
+          setAuth(true);
+          setUserName(data.user.username)
+          setUserId(data.user._id)
+          setusrType(data.user.userType)    
+
+          
+          if(data.user.userType == "user"){
+            navigate('/organizer');
+          }
+          else{
+            navigate('/Admin');
+          }
+        })
+     
+        
+      // const { setAuth, setUserName, setUserId, userId } = useAuth();
+      
+
+      
+      
     } catch (error) {
-      // Handle errors, e.g., show an error message
+      
       console.error('Login error', error.response ? error.response.data : 'Error');
       // Here you could set an error state and display it to the user
     }

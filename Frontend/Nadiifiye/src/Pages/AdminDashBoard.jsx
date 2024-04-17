@@ -1,10 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+// import { useAuth } from '../utility/UserContext';
 
 
 
 const AdminDashBoard = () => {
   const [DshCount, setDshCount] = useState({Vol: 0, Org: 0, Camp: 0});
   const [JoinedList, setJoinedList] = useState([]);
+  const { Auth, UserName, UserId, userId, usrType  } = useContext();
+
 
   const GetJoined = () => {
     console.log("called");

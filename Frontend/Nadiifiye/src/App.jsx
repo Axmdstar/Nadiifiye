@@ -26,7 +26,7 @@ import  Campaign  from "./Pages/Campaign";
 import JoinForm from "./Pages/JoinForm"
 import Contact from "./Pages/Contact"
 import OrgUpdate from "./Pages/OrgUpdate";
-import { AuthProvider, useAuth } from "./utility/UserContext";
+import { AuthContext } from "./utility/UserContext";
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -71,9 +71,9 @@ const Router = createBrowserRouter(
 
 function App() {
   return (
-    <AuthProvider>
+    
       <RouterProvider router={Router} />
-    </AuthProvider>
+    
   );
 }
 

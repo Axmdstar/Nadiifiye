@@ -296,7 +296,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-
+ 
       {/* Compaigns */}
       <div className="container my-5 py-5">
         <h1 className="fw-bolder pb-5 recentcamp" style={{fontSize:"30px",marginLeft:"125px"}}>Recent Campaigns</h1>
@@ -307,7 +307,7 @@ export default function Home() {
                 <div className="service">
                   <div className="iconbox">
                     <img
-                      src={`http://localhost:4000/Campaign/campaignImage/${campaign.Image}`}
+                      src={`http://localhost:4000/uploads/campaignImage/${campaign.Image}`}
                       alt={campaign.Name}
                     />
                   </div>

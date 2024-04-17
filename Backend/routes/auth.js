@@ -43,24 +43,50 @@ app.post("/register", async (req, res) => {
 // User Login
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
-  
+  // console.log('req.body :>> ', req.body);
   try {
     let user = await User.findOne({ email });
-    if (!user) return res.status(400).json({ msg: 'Invalid Credentials' });
+    
+    // if (!user) return res.status(400).json({ msg: 'Invalid Credentials' });
 
-    const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(400).json({ msg: 'Invalid Credentials' });
+    // const isMatch = await bcrypt.compare(password, user.password);
+    // if (!isMatch) return res.status(400).json({ msg: 'Invalid Credentials' });
 
-    const payload = { user: { id: user.id } };
-    jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
-      if (err) throw err;
-      res.json({ token });
-    });
+    console.log(user);
+    res.json({ user });
+    
+    // const payload = { user: { id: user.id } };
+    // jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
+    //   if (err) throw err;
+    // });
   } catch (err) {
     console.error(err.message);
     res.status(500).send('Server Error');
   }
 });
+
+
+// app.post('/login', async (req, res) => {
+//   const { email, password } = req.body;
+//   console.log('res.body :>> ', res.body);
+//   try {
+//     let user = await User.findOne({ email });
+//     if (!user) return res.status(400).json({ msg: 'Invalid Credentials' });
+
+//     const isMatch = await bcrypt.compare(password, user.password);
+//     if (!isMatch) return res.status(400).json({ msg: 'Invalid Credentials' });
+
+//     // Instead of just the token, send user data along with it
+//     const payload = { user: { id: user.id } };
+//     jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: 3600 }, (err, token) => {
+//       if (err) throw err;
+//       res.json({ token, user: { id: user.id, username: user.username, email: user.email, userType: user.userType } });
+//     });
+//   } catch (err) {
+//     console.error(err.message);
+//     res.status(500).send('Server Error');
+//   }
+// });
 
 
 app.post('/forgot-password', async (req, res) => {

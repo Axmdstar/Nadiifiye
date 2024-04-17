@@ -2,10 +2,13 @@ import { ChevronFirst, ChevronLast } from "lucide-react"
 import logo from "../assets/Logo.jpeg"
 import profile from "../assets/react.svg"
 import { createContext, useContext, useState } from "react"
+import { AuthContext, useAuth } from '../utility/UserContext';
+
 
 const SidebarContext = createContext();
 
 export default function Sidebar({ children }) {
+    const { userId, usrType, username  } = useAuth()
     const [expanded, setExpanded] = useState(false)
     return (
       <>
@@ -39,7 +42,7 @@ export default function Sidebar({ children }) {
                 } `}
               >
                 <div className="leading-4">
-                  <h4 className="font-semibold">UserName</h4>
+                  <h4 className="font-semibold">{username}</h4>
                   
                 </div>
 
