@@ -27,6 +27,7 @@ import JoinForm from "./Pages/JoinForm"
 import Contact from "./Pages/Contact"
 import OrgUpdate from "./Pages/OrgUpdate";
 import { AuthContext } from "./utility/UserContext";
+import Reporting from "./Pages/Report";
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -53,6 +54,7 @@ const Router = createBrowserRouter(
         <Route path="Campaigns" element={<CampainsPage />} />
         <Route path="Volunteers" element={<VolunteersPage />} />
         <Route path="updateOrg/:id" element={<OrgUpdate />} />
+        <Route path="Report" element={<Reporting />} />
       </Route>
 
       <Route path="Organizer" element={<OrganizerDshBLayout />}>

@@ -100,7 +100,7 @@ const OrganizerPage = () => {
   }
 
   return (
-    <div className="w-full ">
+    <div className="w-full h-screen">
       {FormState ? (
         <div>
           <div className="grid text-sm grid-cols-2 lg:grid-cols-3">
@@ -258,11 +258,11 @@ const OrganizerPage = () => {
           </div>
 
           {/* table */}
-          <div className=" w-11/12  ">
+          <div className=" w-11/12 ">
             <div className="flex flex-col">
               <div className="overflow-y-auto sm:-mx-6 lg:-mx-8">
                 <div className="inline-block min-w-full py-2 sm:px-6 lg:px-8">
-                  <div className="overflow-y-scroll h-[80vh]">
+                  <div className="overflow-y-scroll h-[70vh]">
                     <table className="min-w-full text-left text-sm font-light  ">
                       <thead className="border-b font-medium dark:border-neutral-500">
                         <tr>
