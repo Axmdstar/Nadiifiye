@@ -7,23 +7,21 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import { BsArrowUp, BsArrowDown } from "react-icons/bs";
 import moment from "moment";
 import "../../public/style.css";
-import { Navigate, useNavigate} from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Campaign() {
-  const endpoint = "http://localhost:4000" ;
+  const endpoint = "http://localhost:4000";
   const [campaigns, setCampaigns] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [sortType, setSortType] = useState("date");
   const [sortDirection, setSortDirection] = useState("asc");
   const navigate = useNavigate();
 
-
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await axios.get(`${endpoint}/Campaign/AllCampaigns`);
         setCampaigns(response.data);
-        
       } catch (error) {
         console.error("Error fetching campaigns:", error);
       }
@@ -63,10 +61,9 @@ export default function Campaign() {
     return sortDirection === "asc" ? comparison : comparison * -1;
   });
 
-
   const handleJoinCampaign = async (id) => {
     navigate(`../JoinForm/${id}`);
-    
+
     try {
       const response = await axios.patch(`${endpoint}/Campaign/Join/${id}`);
       const updatedCampaigns = campaigns.map((campaignItem) => {
@@ -81,12 +78,11 @@ export default function Campaign() {
         return campaignItem;
       });
       setCampaigns(updatedCampaigns);
-      
-  
+
       const campaign = updatedCampaigns.find(
         (campaignItem) => campaignItem._id === id
       );
-      
+
       Navigate(`./JoinForm/${id}`);
       // Navigate to another page with the id
     } catch (error) {
@@ -136,28 +132,28 @@ export default function Campaign() {
         <div className="row">
           {sortedCampaigns.map((campaign) => (
             <div className="col-lg-4 p-4" key={campaign._id}>
-            <div className="blackbox">
-              <div className="service">
-                <div className="iconbox">
+              <div className="blackbox">
+                <div className="service">
+                  <div className="iconbox">
                     <img
                       src={`${endpoint}/uploads/campaignImage/${campaign.Image}`}
                       alt={campaign.Name}
                     />
-                </div>
-                <div style={{ marginTop: "-9px", marginLeft: "15px" }}>
+                  </div>
+                  <div style={{ marginTop: "-9px", marginLeft: "15px" }}>
                     <h3 className="mx-4 fs-3 fw-bold">{campaign.Name}</h3>
                     <div
                       className="d-flex mt-2 "
                       style={{ marginLeft: "17px" }}
                     >
-                    <p
-                      className="py-1 px-2"
-                      style={{
-                        fontSize: "8px",
-                        border: "1px solid #dad9de",
-                        borderRadius: "20px",
-                      }}
-                    >
+                      <p
+                        className="py-1 px-2"
+                        style={{
+                          fontSize: "8px",
+                          border: "1px solid #dad9de",
+                          borderRadius: "20px",
+                        }}
+                      >
                         {new Date(campaign.DateTime).toLocaleDateString(
                           "en-US",
                           {
@@ -167,23 +163,29 @@ export default function Campaign() {
                             year: "numeric",
                           }
                         )}
-                    </p>
-                    <ul className="fw-bold" style={{ fontSize: "12px", marginLeft:"15px"}}>
+                      </p>
+                      <ul
+                        className="fw-bold"
+                        style={{ fontSize: "12px", marginLeft: "15px" }}
+                      >
                         <li>{campaign.Location}</li>
-                    </ul>
+                      </ul>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div
-                className="row"
-                style={{ marginTop: "-30px", paddingLeft: "15px" }}
-              >
-                <div className="col-lg-12">
+                <div
+                  className="row"
+                  style={{ marginTop: "-30px", paddingLeft: "15px" }}
+                >
+                  <div className="col-lg-12">
                     <p>{campaign.Description}</p>
                   </div>
                 </div>
-                <div className="row" style={{ marginTop: "40px",marginLeft:"3px" }}>
-                <div className="col-lg-6">
+                <div
+                  className="row"
+                  style={{ marginTop: "40px", marginLeft: "3px" }}
+                >
+                  <div className="col-lg-6">
                     <ProgressBar
                       now={
                         (campaign.currentNumOfPeople / campaign.NumOfPeople) *
@@ -199,9 +201,9 @@ export default function Campaign() {
                       }
                     />
                     <p className="fw-bold">{`${campaign.currentNumOfPeople}/${campaign.NumOfPeople}`}</p>
-                </div>
-                <div className="col-lg-6">
-                  <button
+                  </div>
+                  <div className="col-lg-6">
+                    <button
                       className={`btn ${
                         campaign.currentNumOfPeople === campaign.NumOfPeople ||
                         moment(campaign.DateTime).isSameOrBefore(
@@ -210,11 +212,11 @@ export default function Campaign() {
                           ? "btn-success disabled"
                           : "btn-primary"
                       }`}
-                    style={{
-                      marginTop: "-15px",
-                      marginLeft: "66px",
-                      width: "100px",
-                    }}
+                      style={{
+                        marginTop: "-15px",
+                        marginLeft: "66px",
+                        width: "100px",
+                      }}
                       onClick={() =>
                         campaign.currentNumOfPeople !== campaign.NumOfPeople &&
                         moment(campaign.DateTime).isAfter(

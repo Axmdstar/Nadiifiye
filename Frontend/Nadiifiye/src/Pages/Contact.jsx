@@ -30,7 +30,7 @@ export default function Contact() {
     } catch (error) {
       toast.success("Error sending message, please try again.");
       console.error("Error sending message:", error);
-      
+
       // display error message to user
     }
   };

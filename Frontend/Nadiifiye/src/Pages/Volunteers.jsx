@@ -1,29 +1,28 @@
 import { useEffect, useState } from "react";
 
 const VolunteersPage = () => {
-    const [Vlist, setVlist] = useState([]);
-    
-    const MainUrl = "http://localhost:4000/Volunteer";
-    const Apipath = "/AllVolunteers"
-    // http://localhost:4000/Volunteer/AllVolunteers
-    
-    useEffect(()=>{
-      fetch(MainUrl + Apipath)
-              .then((res) => {
-                  return res.json();
-              })
-              .then((data) => {
-                  setVlist(data)
-                  console.log('data :>> ', data);
-              })
-              .catch((err) => {
-                  console.log('err :>> ', err);
-              })
-    }, [])
+  const [Vlist, setVlist] = useState([]);
 
+  const MainUrl = "http://localhost:4000/Volunteer";
+  const Apipath = "/AllVolunteers";
+  // http://localhost:4000/Volunteer/AllVolunteers
 
-    return ( 
-        <div className="w-full ">
+  useEffect(() => {
+    fetch(MainUrl + Apipath)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setVlist(data);
+        console.log("data :>> ", data);
+      })
+      .catch((err) => {
+        console.log("err :>> ", err);
+      });
+  }, []);
+
+  return (
+    <div className="w-full ">
       {/* Title  */}
       <div className="text-gray-600">
         <h1 className=" font-medium text-4xl py-5">Volunteers</h1>
@@ -59,58 +58,52 @@ const VolunteersPage = () => {
                       <th scope="col" className="px-6 py-4">
                         NO.Events
                       </th>
-                      
                     </tr>
                   </thead>
                   <tbody>
-                    
+                    {Vlist.length === 0 ? (
+                      <tr className="">
+                        <td colSpan={6} className=" text-center">
+                          <p className="text-xl"> Empty </p>
+                        </td>
+                      </tr>
+                    ) : (
+                      Vlist.map((item, i) => {
+                        return (
+                          <tr
+                            key={i}
+                            className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-green-100"
+                          >
+                            <td className="whitespace-nowrap px-6 py-4 font-medium">
+                              <img
+                                src={`http://localhost:4000/uploads/VolunteerImage/${item.profileImage}`}
+                                className="w-12 rounded-full"
+                                alt="Avatar"
+                              />
+                            </td>
 
-                    
-                    {Vlist.length === 0 ?
-                    <tr className="">
-                      <td colSpan={6} className=" text-center">
-                        <p className="text-xl"> Empty </p> 
-                      </td>
-                    </tr>
-                     :
-                     
-                     Vlist.map((item, i) => {
-                      return (
-                        <tr
-                          key={i}
-                          className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-green-100"
-                        >
-                          <td className="whitespace-nowrap px-6 py-4 font-medium">
-                            <img
-                              src={`http://localhost:4000/uploads/VolunteerImage/${item.profileImage}`}
-                              className="w-12 rounded-full"
-                              alt="Avatar"
-                            />
-                          </td>
-
-                          <td className="whitespace-nowrap px-6 py-4">
-                            {item.Name}
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            {item.Phone}
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            {item.Address}
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            {item.Emaail}
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            {item.TypeOfInterest}
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            {item.numOfEvent}
-                          </td>
-
-
-                        </tr>
-                      );
-                    })}
+                            <td className="whitespace-nowrap px-6 py-4">
+                              {item.Name}
+                            </td>
+                            <td className="whitespace-nowrap px-6 py-4">
+                              {item.Phone}
+                            </td>
+                            <td className="whitespace-nowrap px-6 py-4">
+                              {item.Address}
+                            </td>
+                            <td className="whitespace-nowrap px-6 py-4">
+                              {item.Emaail}
+                            </td>
+                            <td className="whitespace-nowrap px-6 py-4">
+                              {item.TypeOfInterest}
+                            </td>
+                            <td className="whitespace-nowrap px-6 py-4">
+                              {item.numOfEvent}
+                            </td>
+                          </tr>
+                        );
+                      })
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -119,7 +112,7 @@ const VolunteersPage = () => {
         </div>
       </div>
     </div>
-     );
-}
- 
+  );
+};
+
 export default VolunteersPage;

@@ -31,8 +31,7 @@ const VolunteerModel = mongoose.Schema(
     profileImage: {
       type: String,
       required: true,
-    }
-    
+    },
   },
   { timestamps: true }
 );

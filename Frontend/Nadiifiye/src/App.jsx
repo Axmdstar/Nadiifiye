@@ -3,10 +3,8 @@ import {
   Route,
   createBrowserRouter,
   RouterProvider,
-  createRoutesFromElements
+  createRoutesFromElements,
 } from "react-router-dom";
-
-
 
 import HomeLayout from "./Pages/Layout/HomeLayout";
 import HomePage from "./Pages/HomePage";
@@ -22,37 +20,32 @@ import RegisterLayout from "./Pages/Layout/RegisterLayout";
 import Register from "./components/Register";
 import Login from "./components/Login";
 import ForgotPassword from "./components/ForgetPassword";
-import  Campaign  from "./Pages/Campaign";
-import JoinForm from "./Pages/JoinForm"
-import Contact from "./Pages/Contact"
+import Campaign from "./Pages/Campaign";
+import JoinForm from "./Pages/JoinForm";
+import Contact from "./Pages/Contact";
+import Applicationspage from "./Pages/Applications";
+import ViewApplicants from "./Pages/viewapplicants";
 import OrgUpdate from "./Pages/OrgUpdate";
 import { AuthContext } from "./utility/UserContext";
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
-    
-    // <Route path="/" element={<HomePage />} /> {/* Home route at root path */}
-    // <Route path="/Home" element={<HomeLayout />}> {/* Home with optional layout */}
-    //   <Route index element={<HomePage />} /> {/* Nested Home for clarity */}
-    //   <Route path="contact" element={<Contact />} />
-    //   <Route path="campaigns" element={<Campaign />} />
-    // </Route>
-
-    <Route >
-
+    <Route>
       <Route path="/" element={<HomeLayout />}>
         <Route index element={<HomePage />} />
         <Route path="contact" element={<Contact />} />
         <Route path="campaigns" element={<Campaign />} />
-        <Route path="JoinForm/:id" element={<JoinForm />}  />
+        <Route path="JoinForm/:id" element={<JoinForm />} />
       </Route>
 
       <Route path="Admin" element={<AdminDashBoardLayout />}>
         <Route index element={<AdminDashBoard />} />
         <Route path="Organizer" element={<OrganizerPage />} />
+        <Route path="applications" element={<Applicationspage />} />
         <Route path="Campaigns" element={<CampainsPage />} />
         <Route path="Volunteers" element={<VolunteersPage />} />
         <Route path="updateOrg/:id" element={<OrgUpdate />} />
+        <Route path="Applications/viewapplicants/:id" element={<ViewApplicants />} />
       </Route>
 
       <Route path="Organizer" element={<OrganizerDshBLayout />}>
@@ -70,11 +63,7 @@ const Router = createBrowserRouter(
 );
 
 function App() {
-  return (
-    
-      <RouterProvider router={Router} />
-    
-  );
+  return <RouterProvider router={Router} />;
 }
 
 export default App;

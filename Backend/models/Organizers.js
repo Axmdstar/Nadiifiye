@@ -18,14 +18,19 @@ const OrganizerModel = mongoose.Schema(
       type: String,
       required: true,
     },
+    orgType: {
+      type: String,
+      required: true,
+    },
     website: {
       type: String,
-      default: "None"
+      default: "None",
     },
     profileImage: {
       type: String,
       required: true,
     },
+    status: { type: String, enum: ["pending", "approved","rejected"], default: "approved" },
   },
   { timestamps: true }
 );

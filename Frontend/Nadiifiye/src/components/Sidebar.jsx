@@ -9,7 +9,8 @@ const SidebarContext = createContext();
 
 export default function Sidebar({ children }) {
   const { userId, usrType, userName } = useAuth();
-  const { setAuth, setUserName, setUserId, setusrType } = useContext(AuthContext);
+  const { setAuth, setUserName, setUserId, setusrType } =
+    useContext(AuthContext);
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
   const handleLogout = () => {
@@ -55,9 +56,7 @@ export default function Sidebar({ children }) {
             >
               <div className="leading-4">
                 <h4 className="font-semibold text-black">{userName}</h4>
-                <p>
-                  {usrType}
-                </p>
+                <p>{usrType}</p>
               </div>
 
               <button

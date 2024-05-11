@@ -38,35 +38,39 @@ const imageLocation = multer.diskStorage({
     cb(null, "uploads/organizerImage");
   },
   filename: (req, file, cb) => {
-    
     cb(null, file.originalname);
   },
 });
 
 const uploadimg = multer({ storage: imageLocation });
 //add organizer
-app.post("/addorganizer", uploadimg.single("profileImage"), async (req, res) => {
-  // console.log('req :>> ', req);
-  try {
-    const newData = new OrganizerModel({
-      Name: req.body.Name,
-      Phone: req.body.Phone,
-      Address: req.body.Address,
-      Emaail: req.body.Emaail,
-      website: req.body.website,
-      profileImage: req.file.filename,
-    });
-    
-    const saveData = await newData.save();
-    res.json({
-      status: "success",
-      message: "successfully added",
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-    // console.log('req.file.filename :>> ', req.file.filename);
+app.post(
+  "/addorganizer",
+  uploadimg.single("profileImage"),
+  async (req, res) => {
+    // console.log('req :>> ', req);
+    try {
+      const newData = new OrganizerModel({
+        Name: req.body.Name,
+        Phone: req.body.Phone,
+        Address: req.body.Address,
+        Emaail: req.body.Emaail,
+        orgType:req.body.orgType,
+        website: req.body.website,
+        profileImage: req.file.filename,
+      });
+
+      const saveData = await newData.save();
+      res.json({
+        status: "success",
+        message: "successfully added",
+      });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+      // console.log('req.file.filename :>> ', req.file.filename);
+    }
   }
-});
+);
 
 //update organizer
 app.put("/update/:id", async (req, res) => {
@@ -76,11 +80,11 @@ app.put("/update/:id", async (req, res) => {
       { $set: req.body }
     );
 
-    console.log('req.body :>> ', req.body);
+    console.log("req.body :>> ", req.body);
     if (updateData.n === 0) {
       return res.status(404).json({ error: "No organizer updated" });
     }
-    
+
     res.json({
       status: "success",
       message: "successfully updated",

@@ -2,33 +2,31 @@ import { useEffect, useState } from "react";
 import useFetch from "../utility/UseFetch";
 
 const CampainsPage = () => {
-    const [CampaignList, setCampaignList] = useState([]);
-    const MainUrl = "http://localhost:4000/Campaign";
-    const Apipath = "/AllCampaigns";
+  const [CampaignList, setCampaignList] = useState([]);
+  const MainUrl = "http://localhost:4000/Campaign";
+  const Apipath = "/AllCampaigns";
 
-    // http://localhost:4000/Campaign/AllCampaigns
-    
-    useEffect(()=>{
-      fetch(MainUrl + Apipath)
-              .then((res) => {
-                  return res.json();
-              })
-              .then((data) => {
-                  setCampaignList(data)
-                  console.log('data :>> ', data);
-              })
-              .catch((err) => {
-                  console.log('err :>> ', err);
-              })
-    }, [])
+  // http://localhost:4000/Campaign/AllCampaigns
 
+  useEffect(() => {
+    fetch(MainUrl + Apipath)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        setCampaignList(data);
+        console.log("data :>> ", data);
+      })
+      .catch((err) => {
+        console.log("err :>> ", err);
+      });
+  }, []);
 
-    return ( 
-        <div className="w-full ">
+  return (
+    <div className="w-full ">
       {/* Title  */}
       <div className="text-gray-600">
         <h1 className=" font-medium text-4xl py-5">Campaigns</h1>
-        
       </div>
 
       {/* table */}
@@ -61,45 +59,41 @@ const CampainsPage = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    
-
-                    
-                    {CampaignList.length === 0 ?
-                    <tr className="">
-                      <td colSpan={6} className=" text-center">
-                        <p className="text-xl"> Empty </p> 
-                      </td>
-                    </tr>
-                     :
-                     
-                     CampaignList.map((item, i) => {
-                      return (
-                        <tr
-                          key={i}
-                          className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-green-100"
-                        >
-
-                          <td className="whitespace-nowrap px-6 py-4">
-                            {item.Name}
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            {item.Organizer}
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            {item.Location}
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            {item.DateTime}
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            {item.Type}
-                          </td>
-                          <td className="whitespace-nowrap px-6 py-4">
-                            {item.NumOfPeople}/{item.currentNumOfPeople}
-                          </td>
-                        </tr>
-                      );
-                    })}
+                    {CampaignList.length === 0 ? (
+                      <tr className="">
+                        <td colSpan={6} className=" text-center">
+                          <p className="text-xl"> Empty </p>
+                        </td>
+                      </tr>
+                    ) : (
+                      CampaignList.map((item, i) => {
+                        return (
+                          <tr
+                            key={i}
+                            className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-green-100"
+                          >
+                            <td className="whitespace-nowrap px-6 py-4">
+                              {item.Name}
+                            </td>
+                            <td className="whitespace-nowrap px-6 py-4">
+                              {item.Organizer}
+                            </td>
+                            <td className="whitespace-nowrap px-6 py-4">
+                              {item.Location}
+                            </td>
+                            <td className="whitespace-nowrap px-6 py-4">
+                              {item.DateTime}
+                            </td>
+                            <td className="whitespace-nowrap px-6 py-4">
+                              {item.Type}
+                            </td>
+                            <td className="whitespace-nowrap px-6 py-4">
+                              {item.NumOfPeople}/{item.currentNumOfPeople}
+                            </td>
+                          </tr>
+                        );
+                      })
+                    )}
                   </tbody>
                 </table>
               </div>
@@ -108,9 +102,7 @@ const CampainsPage = () => {
         </div>
       </div>
     </div>
-        
-        
-     );
-}
- 
+  );
+};
+
 export default CampainsPage;

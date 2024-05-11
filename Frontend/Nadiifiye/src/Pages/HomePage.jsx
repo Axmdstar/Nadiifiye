@@ -136,7 +136,10 @@ export default function Home() {
       <div className="container hero">
         <div className="row align-items-center ">
           <div className="col-lg-6 herotext">
-            <h1 className="mb-3" style={{ fontWeight: "800", fontFamily: "serif" }}>
+            <h1
+              className="mb-3"
+              style={{ fontWeight: "800", fontFamily: "serif" }}
+            >
               Make a Difference: Join Our Clean-<br></br>Up Campaigns
             </h1>
             <p className="mb-3">
@@ -296,11 +299,16 @@ export default function Home() {
           </div>
         </div>
       </div>
- 
+
       {/* Compaigns */}
       <div className="container my-5 py-5">
-        <h1 className="fw-bolder pb-5 recentcamp" style={{fontSize:"30px",marginLeft:"125px"}}>Recent Campaigns</h1>
-        <div className="row" style={{justifyContent:"center"}}>
+        <h1
+          className="fw-bolder pb-5 recentcamp"
+          style={{ fontSize: "30px", marginLeft: "125px" }}
+        >
+          Recent Campaigns
+        </h1>
+        <div className="row" style={{ justifyContent: "center" }}>
           {lastTwoCampaigns.map((campaign) => (
             <div key={campaign._id} className="col-lg-4 mb-4">
               <div className="blackbox">
@@ -332,7 +340,14 @@ export default function Home() {
                           }
                         )}
                       </p>
-                      <ul className="fw-bold" style={{ fontSize: "10px" , marginLeft:"10px",marginTop:"3px"}}>
+                      <ul
+                        className="fw-bold"
+                        style={{
+                          fontSize: "10px",
+                          marginLeft: "10px",
+                          marginTop: "3px",
+                        }}
+                      >
                         <li>{campaign.Location}</li>
                       </ul>
                     </div>
@@ -342,11 +357,14 @@ export default function Home() {
                   className="row"
                   style={{ marginTop: "-30px", paddingLeft: "15px" }}
                 >
-                  <div className="col-lg-12" >
+                  <div className="col-lg-12">
                     <p className="p-3">{campaign.Description}</p>
                   </div>
                 </div>
-                <div className="row" style={{ marginTop: "40px" ,marginLeft:"15px"}}>
+                <div
+                  className="row"
+                  style={{ marginTop: "40px", marginLeft: "15px" }}
+                >
                   <div className="col-lg-6">
                     <ProgressBar
                       now={

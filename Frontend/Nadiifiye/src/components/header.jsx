@@ -2,14 +2,13 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/images/Nadii-01.png";
 import { AiOutlineClose, AiOutlineMenu } from "react-icons/ai";
 import { useState, useContext } from "react";
-import { AuthContext, useAuth } from '../utility/UserContext';
-
+import { AuthContext, useAuth } from "../utility/UserContext";
 
 export default function Header() {
-  const { userId, usrType, username  } = useContext(AuthContext)
+  const { userId, usrType, username } = useContext(AuthContext);
   const navigate = useNavigate();
   console.log(userId);
-  console.log('usrType :>> ', usrType);
+  console.log("usrType :>> ", usrType);
 
   const scrollToAbout = () => {
     const aboutSection = document.getElementById("about");
@@ -49,7 +48,9 @@ export default function Header() {
       />
       <ul style={{ display: isOpnen ? "none" : "flex" }}>
         <li>
-          <Link to="/" onClick={handleMenuLinkClick}>Home</Link>
+          <Link to="/" onClick={handleMenuLinkClick}>
+            Home
+          </Link>
         </li>
         <li>
           <Link to="/" onClick={scrollToAbout}>
@@ -63,20 +64,19 @@ export default function Header() {
           <Link to="./contact">Contact Us</Link>
         </li>
 
-        { 
-          usrType != "" ?
-          (<p></p>)
-           :
-        (
+        {usrType != "" ? (
+          <p></p>
+        ) : (
           <li>
-        <NavLink  to="/Register" className="btn" style={{ backgroundColor: "#28a745" }} >
-          Signup 
-        </NavLink>
-        </li>
-          )
-        }
-          
-        
+            <NavLink
+              to="/Register"
+              className="btn"
+              style={{ backgroundColor: "#28a745" }}
+            >
+              Signup
+            </NavLink>
+          </li>
+        )}
       </ul>
     </div>
   );
