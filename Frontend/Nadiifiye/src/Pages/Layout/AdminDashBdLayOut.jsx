@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { ClipboardList, Users, LayoutDashboard, Stamp ,UserRoundCheck} from "lucide-react";
+import { ClipboardList, Users, LayoutDashboard, Stamp ,UserRoundCheck,Flag} from "lucide-react";
 import Sidebar, { SidebarItem } from "../../components/Sidebar";
 import { useLocation, NavLink } from "react-router-dom";
 
@@ -49,6 +49,9 @@ const AdminDashBoardLayout = () => {
             active={CurrentPath === "Applications" ? true : false}
           />
         </NavLink>
+        <NavLink to={"Report"}>
+            <SidebarItem icon={<Flag size={20} />} text="Report" active={ CurrentPath === "Report" ? true : false} />
+          </NavLink>
       </Sidebar>
       <Outlet />
     </div>
