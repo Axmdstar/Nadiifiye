@@ -17,8 +17,6 @@ app.get("/AllVolunteers", async (req, res) => {
   }
 });
 
-
-
 //show single volunteer
 app.get("/single/:id", async (req, res) => {
   try {
@@ -48,26 +46,30 @@ const imageLocation = multer.diskStorage({
 const uploadimg = multer({ storage: imageLocation });
 
 //add volunteer
-app.post("/addVolunteer", uploadimg.single("profileImage"), async (req, res) => {
-  try {
-    const newData = new VolunteerModel({
-      Name: req.body.Name,
-      Phone: req.body.Phone,
-      Address: req.body.Address,
-      Emaail: req.body.Emaail,
-      TypeOfInterest: req.body.TypeOfInterest,
-      numOfEvent: req.body.numOfEvent,
-      profileImage: req.file.filename,
-    });
-    const saveData = await newData.save();
-    res.json({
-      status: "success",
-      message: "successfully added",
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+app.post(
+  "/addVolunteer",
+  uploadimg.single("profileImage"),
+  async (req, res) => {
+    try {
+      const newData = new VolunteerModel({
+        Name: req.body.Name,
+        Phone: req.body.Phone,
+        Address: req.body.Address,
+        Emaail: req.body.Emaail,
+        TypeOfInterest: req.body.TypeOfInterest,
+        numOfEvent: req.body.numOfEvent,
+        profileImage: req.file.filename,
+      });
+      const saveData = await newData.save();
+      res.json({
+        status: "success",
+        message: "successfully added",
+      });
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
   }
-});
+);
 
 //update volunteer
 app.put("/update/:id", async (req, res) => {

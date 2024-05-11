@@ -11,26 +11,22 @@ app.use(cors());
 const multer = require("multer");
 const path = require("path");
 
-
-
-
 app.get("/DshCounts", async (req, res) => {
-try {
+  try {
     const totalVolunteers = await VolunteerModel.countDocuments();
     const totalJoined = await JoinedModel.countDocuments();
     const totalCampaigns = await CampaignsModel.countDocuments();
     const totalOrganizers = await OrganizerModel.countDocuments();
 
     res.json({
-    totalVolunteers,
-    totalJoined,
-    totalCampaigns,
-    totalOrganizers,
+      totalVolunteers,
+      totalJoined,
+      totalCampaigns,
+      totalOrganizers,
     });
-} catch (err) {
+  } catch (err) {
     res.status(500).json({ error: err.message });
-}
+  }
 });
-
 
 module.exports = app;

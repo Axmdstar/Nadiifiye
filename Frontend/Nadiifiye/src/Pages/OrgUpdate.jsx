@@ -177,11 +177,9 @@ export default function OrgUpdate() {
               {/* Cancel  */}
               <div className="inline-flex items-end">
                 <Link to={"../Organizer"}>
-                <button
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
-                  Cancel
-                </button > 
-
+                  <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-4 rounded">
+                    Cancel
+                  </button>
                 </Link>
               </div>
             </div>

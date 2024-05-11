@@ -54,7 +54,7 @@ app.post("/addCampaign", uploadimg.single("Image"), async (req, res) => {
       DateTime: req.body.DateTime,
       Type: req.body.Type,
       NumOfPeople: req.body.NumOfPeople,
-      currentNumOfPeople:req.body.currentNumOfPeople,
+      currentNumOfPeople: req.body.currentNumOfPeople,
       Image: req.file.filename,
     });
     const saveData = await newData.save();
@@ -66,7 +66,6 @@ app.post("/addCampaign", uploadimg.single("Image"), async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
-
 
 //update campaigns
 app.put("/update/:id", async (req, res) => {
@@ -132,12 +131,14 @@ app.delete("/delete/:id", async (req, res) => {
 });
 app.get("/OrgCampaign/:Organizer", async (req, res) => {
   try {
-    const OrgCampaigns = await CampaignsModel.find({Organizer: req.params.Organizer});
-    res.send(OrgCampaigns)    
+    const OrgCampaigns = await CampaignsModel.find({
+      Organizer: req.params.Organizer,
+    });
+    res.send(OrgCampaigns);
   } catch (err) {
-    res.status(500).json({err: error.message})
+    res.status(500).json({ err: error.message });
   }
-})
+});
 // total Campaigns
 app.get("/total", async (req, res) => {
   try {
@@ -152,14 +153,17 @@ app.get("/finishedCampaigns", async (req, res) => {
   try {
     const finishedCampaignsCount = await CampaignsModel.aggregate([
       {
-        $match: { $expr: { $eq: ['$currentNumOfPeople', '$NumOfPeople'] } }
+        $match: { $expr: { $eq: ["$currentNumOfPeople", "$NumOfPeople"] } },
       },
       {
-        $count: "totalFinishedCampaigns"
-      }
+        $count: "totalFinishedCampaigns",
+      },
     ]);
     if (finishedCampaignsCount.length > 0) {
-      res.send({ totalFinishedCampaigns: finishedCampaignsCount[0].totalFinishedCampaigns });
+      res.send({
+        totalFinishedCampaigns:
+          finishedCampaignsCount[0].totalFinishedCampaigns,
+      });
     } else {
       res.send({ totalFinishedCampaigns: 0 }); // No finished campaigns found
     }
