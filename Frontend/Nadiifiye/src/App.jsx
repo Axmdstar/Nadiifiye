@@ -28,6 +28,7 @@ import ViewApplicants from "./Pages/viewapplicants";
 import OrgUpdate from "./Pages/OrgUpdate";
 import { AuthContext } from "./utility/UserContext";
 import Reporting from "./Pages/Report";
+import OrgReport from "./Pages/OrgReport";
 
 const Router = createBrowserRouter(
   createRoutesFromElements(
@@ -53,6 +54,7 @@ const Router = createBrowserRouter(
       <Route path="Organizer" element={<OrganizerDshBLayout />}>
         <Route index element={<OrgCampaigns />} />
         <Route path="Volunteer" element={<OrgVolunteer />} />
+        <Route path="Report" element={<OrgReport />} />
       </Route>
 
       <Route path="Register" element={<RegisterLayout />}>

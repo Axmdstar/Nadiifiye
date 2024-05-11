@@ -3,7 +3,7 @@ import ComboBox from "../components/ComboBox";
 import SearchDropdown from "../components/Search";
 import ExportBtn from "../components/ExportBtn";
 
-const Reporting = () => {
+const OrgReport= () => {
   const [selectedReport, setSelectedReport] = useState(null);
   const [IsLoading, setIsLoading] = useState(true);
   const [SelectedValue, setSelectedValue] = useState(null);
@@ -11,7 +11,6 @@ const Reporting = () => {
   const [fetchedlist, setFetchedlist] = useState([]);
 
   const options = [
-    { label: "Organizers", value: "Organizers" },
     { label: "Campaigns", value: "Campaigns" },
     { label: "Volunteers", value: "Volunteers" },
   ];
@@ -19,10 +18,7 @@ const Reporting = () => {
   useEffect(() => {
     if ( selectedReport != null && SelectedValue == null ) {
       switch (selectedReport.value) {
-        case "Organizers":
-          getOrganizer();
-          console.log("selectedReport :>> ", selectedReport);
-          break;
+        
         case "Volunteers":
           getVolunteers();
           console.log("selectedReport :>> ", selectedReport);
@@ -36,16 +32,13 @@ const Reporting = () => {
     else if(SelectedValue != null) {
       
       switch (selectedReport.value){
-        case "Organizers":
-          console.log('Organizers :>> ', SelectedValue);
-          OrgsCampaign(SelectedValue);
+        
+        case "Volunteers":
+          console.log('Volunteers :>> ', SelectedValue);
           break;
-        // case "Volunteers":
-        //   console.log('Volunteers :>> ', SelectedValue);
-        //   break;
-        // case "Campaigns":
-        //   console.log('Campaigns :>> ', SelectedValue);
-        //   break;
+        case "Campaigns":
+          console.log('Campaigns :>> ', SelectedValue);
+          break;
       }
     }
   }, [selectedReport, SelectedValue]);
@@ -63,20 +56,7 @@ const Reporting = () => {
     setSelectedValue(option);
   };
 
-  const getOrganizer = () => {
-    const endpoint = "http://localhost:4000/Organizer/AllOrganizers";
-    setIsLoading(true);
-    fetch(endpoint)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setFetchedlist(data);
-        setIsLoading(false);
-        console.log("data :>> ", data);
-      });
-  };
-
+  
   const getVolunteers = () => {
     const endpoint = "http://localhost:4000/Volunteer/AllVolunteers";
     setIsLoading(true);
@@ -92,6 +72,7 @@ const Reporting = () => {
   };
 
   const getCampaigns = () => {
+    // instead of getting all campaign get org name instead 
     const endpoint = "http://localhost:4000/Campaign/AllCampaigns";
     setIsLoading(true);
     fetch(endpoint)
@@ -103,19 +84,6 @@ const Reporting = () => {
         setIsLoading(false);
       });
   };
-
-  const OrgsCampaign = (orgname) => {
-    const endpoint = `http://localhost:4000/Campaign/OrgCampaign/${orgname}`;
-    setIsLoading(true);
-    fetch(endpoint)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setFetchedlist(data);
-        setIsLoading(false);
-      });
-  }
 
   return (
     <div className="w-10/12">
@@ -133,12 +101,9 @@ const Reporting = () => {
 
         {IsLoading ? (
           <div>...</div>
-        ) : selectedReport.value == "Organizers" ? (
+        ) : (
           <SearchDropdown options={fetchedlist} onSelect={handleSelectedValue} />
-        )
-        :
-        ""
-        }
+        )}
         
         <ExportBtn tabledata={fetchedlist} type={ !IsLoading ? selectedReport.value : "" } />
       </div>
@@ -156,6 +121,7 @@ const Reporting = () => {
                   <table className="w-11/12 text-left text-sm font-light">
                     <thead className="border-b font-medium dark:border-neutral-500">
                       <tr>
+                        {/* Object.keys(fetchedlist[0] || {}).slice(1).map */}
                         {Object.keys(fetchedlist[0] || {})
                           .slice(1, Object.keys(fetchedlist[0]).length - 1)
                           .map((k, index) => (
@@ -199,15 +165,6 @@ const Reporting = () => {
                                       ""
                                     )}
 
-                                    {selectedReport.label == "Organizers" ? (
-                                      <img
-                                        src={`http://localhost:4000/uploads/organizerImage/${item.profileImage}`}
-                                        className="w-12 rounded-full"
-                                        alt="Avatar"
-                                      />
-                                    ) : (
-                                      ""
-                                    )}
 
                                     {selectedReport.label == "Campaigns" ? (
                                       <img
@@ -240,7 +197,7 @@ const Reporting = () => {
   );
 };
 
-export default Reporting;
+export default OrgReport;
 
 {
   /* <table className="min-w-full text-left text-sm font-light  ">

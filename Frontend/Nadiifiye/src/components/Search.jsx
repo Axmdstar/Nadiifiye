@@ -6,12 +6,12 @@ const SearchDropdown = ({ options, onSelect }) => {
   const dropdownMenuRef = useRef(null);
   const [SelectedValue, setSelectedValue] = useState(null);
 
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+  // useEffect(() => {
+  //   document.addEventListener('mousedown', handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener('mousedown', handleClickOutside);
+  //   };
+  // }, []);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -28,11 +28,11 @@ const SearchDropdown = ({ options, onSelect }) => {
     onSelect(value);
   }
 
-  const handleClickOutside = (event) => {
-    if (dropdownMenuRef && !dropdownMenuRef.contains(event.target)) {
-      setIsOpen(false);
-    }
-  };
+  // const handleClickOutside = (event) => {
+  //   if (dropdownMenuRef && !dropdownMenuRef.contains(event.target)) {
+  //     setIsOpen(false);
+  //   }
+  // };
 
   
 
