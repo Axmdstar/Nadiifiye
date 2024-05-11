@@ -16,6 +16,7 @@ const OrganizerPage = () => {
   // FormData
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [orgType, setorgType] = useState("");
   const [website, setwebsite] = useState("");
   const [tel, setTel] = useState("");
   const [addrss, setAddress] = useState("");
@@ -81,10 +82,19 @@ const OrganizerPage = () => {
     formdata.append("Phone", tel);
     formdata.append("Address", addrss);
     formdata.append("Emaail", email);
+    formdata.append("orgType", orgType);
     formdata.append("website", website);
     formdata.append("profileImage", file);
 
-    console.log("object :>> ", { name, tel, addrss, email, website, file });
+    console.log("object :>> ", {
+      name,
+      tel,
+      addrss,
+      email,
+      orgType,
+      website,
+      file,
+    });
 
     const requestOptions = {
       method: "POST",
@@ -96,7 +106,6 @@ const OrganizerPage = () => {
       .then((response) => response.json())
       .then((result) => AddUserData())
       .catch((error) => console.error(error));
-
   }
 
   return (
@@ -134,6 +143,20 @@ const OrganizerPage = () => {
                       className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                       placeholder="email@domain.com"
                       onChange={(e) => setEmail(e.target.value)}
+                    />
+                  </div>
+
+                  <div className="md:col-span-5">
+                    <label htmlFor="orgType" className="font-medium">
+                      Organizer type
+                    </label>
+                    <input
+                      type="text"
+                      name="orgType"
+                      id="orgType"
+                      className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                      placeholder="type"
+                      onChange={(e) => setorgType(e.target.value)}
                     />
                   </div>
 
@@ -214,28 +237,28 @@ const OrganizerPage = () => {
             <div>
               <div className="md:col-span-5">
                 <div className="mt-36 pt-1 ml-11">
-                    <label className="font-medium">UserName</label>
-                    <input
-                      type="text"
-                      name="full_name"
-                      id="full_name"
-                      className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                      onChange={(e) => setUsername(e.target.value)}
-                    />
-                  </div>
+                  <label className="font-medium">UserName</label>
+                  <input
+                    type="text"
+                    name="full_name"
+                    id="full_name"
+                    className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                    onChange={(e) => setUsername(e.target.value)}
+                  />
+                </div>
 
-                  <div className="md:col-span-5 py-4 ml-11">
-                    <label htmlFor="email" className="font-medium">
-                      Password
-                    </label>
-                    <input
-                      type="text"
-                      name="email"
-                      id="email"
-                      className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
-                      onChange={(e) => setPassword(e.target.value)}
-                    />
-                  </div>
+                <div className="md:col-span-5 py-4 ml-11">
+                  <label htmlFor="password" className="font-medium">
+                    Password
+                  </label>
+                  <input
+                    type="text"
+                    name="password"
+                    id="password"
+                    className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
               </div>
             </div>
           </div>
@@ -282,7 +305,13 @@ const OrganizerPage = () => {
                             Email
                           </th>
                           <th scope="col" className="px-6 py-4">
+                            orgnizer Type
+                          </th>
+                          <th scope="col" className="px-6 py-4">
                             Website
+                          </th>
+                          <th scope="col" className="px-6 py-4">
+                            Status
                           </th>
                         </tr>
                       </thead>
@@ -321,7 +350,13 @@ const OrganizerPage = () => {
                                   {item.Emaail}
                                 </td>
                                 <td className="whitespace-nowrap px-6 py-4">
+                                  {item.orgType}
+                                </td>
+                                <td className="whitespace-nowrap px-6 py-4">
                                   {item.website}
+                                </td>
+                                <td className="whitespace-nowrap px-6 py-4">
+                                  {item.status}
                                 </td>
                                 <td className="whitespace-nowrap px-6 py-4">
                                   <Link to={`../updateOrg/${item._id}`}>
