@@ -22,24 +22,20 @@ const OrganizerDshBLayout = () => {
           <SidebarItem icon={<Users size={20} />} text="Volunteers" />
         </NavLink>
       </Sidebar>
+
+      <NavLink to={"Report"}>
+            <SidebarItem icon={<Flag size={20} />} text="Report" active={ CurrentPath === "Report" ? true : false} />
+          </NavLink>
       <Outlet />
     </div>
   );
 };
 
 
-          <NavLink to={"Report"}>
-            <SidebarItem icon={<Flag size={20} />} text="Report" active={ CurrentPath === "Report" ? true : false} />
-          </NavLink>
+          
 
-        </Sidebar>
-        <Outlet />
         
-        
-      </div>
-        
-     );
-}
+  
  
 export default OrganizerDshBLayout;
 

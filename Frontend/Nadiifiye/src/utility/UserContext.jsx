@@ -28,6 +28,7 @@ export const AuthProvider = ({ children }) => {
   // Retrieve data from Local Storage on component mount
   useEffect(() => {
     const userAuth = localStorage.getItem("userAuth");
+    console.log('userAuth :>> ', userAuth);
     if (userAuth) {
       const { auth, userName, userId, usrType } = JSON.parse(userAuth);
       setAuth(auth);
