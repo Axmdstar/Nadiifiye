@@ -1,6 +1,7 @@
 import "./App.css";
 import {
   Route,
+  Routes,
   createBrowserRouter,
   RouterProvider,
   createRoutesFromElements,
@@ -27,16 +28,19 @@ import Applicationspage from "./Pages/Applications";
 import ViewApplicants from "./Pages/viewapplicants";
 import OrgUpdate from "./Pages/OrgUpdate";
 import { AuthContext } from "./utility/UserContext";
-import Reporting from "./Pages/Report";
+// import Reporting from "./Pages/Report";
 
-const Router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route>
+function App() {
+  return (
+    <Routes>
       <Route path="/" element={<HomeLayout />}>
         <Route index element={<HomePage />} />
         <Route path="contact" element={<Contact />} />
         <Route path="campaigns" element={<Campaign />} />
         <Route path="JoinForm/:id" element={<JoinForm />} />
+        <Route path="Register" element={<Register />} />
+        <Route path="login" element={<Login />} />
+        <Route path="forgot-password" element={<ForgotPassword />} />
       </Route>
 
       <Route path="Admin" element={<AdminDashBoardLayout />}>
@@ -46,26 +50,19 @@ const Router = createBrowserRouter(
         <Route path="Campaigns" element={<CampainsPage />} />
         <Route path="Volunteers" element={<VolunteersPage />} />
         <Route path="updateOrg/:id" element={<OrgUpdate />} />
-        <Route path="Applications/viewapplicants/:id" element={<ViewApplicants />} />
-        <Route path="Report" element={<Reporting />} />
+        <Route
+          path="Applications/viewapplicants/:id"
+          element={<ViewApplicants />}
+        />
+        {/* <Route path="Report" element={<Reporting />} /> */}
       </Route>
 
       <Route path="Organizer" element={<OrganizerDshBLayout />}>
         <Route index element={<OrgCampaigns />} />
         <Route path="Volunteer" element={<OrgVolunteer />} />
       </Route>
-
-      <Route path="Register" element={<RegisterLayout />}>
-        <Route index element={<Register />} />
-        <Route path="login" element={<Login />} />
-        <Route path="forgot-password" element={<ForgotPassword />} />
-      </Route>
-    </Route>
-  )
-);
-
-function App() {
-  return <RouterProvider router={Router} />;
+    </Routes>
+  );
 }
 
 export default App;

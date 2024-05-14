@@ -1,59 +1,62 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
+import Cookies from "universal-cookie";
+import { useNavigate } from "react-router-dom";
 
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
-export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState(false);
-  const [userName, setUserName] = useState("");
-  const [userId, setUserId] = useState("");
-  const [usrType, setusrType] = useState("");
+const AuthProvider = ({ children }) => {
+  const cookies = new Cookies();
+  const token = cookies.get("token");
+  const initialAuth = token ? JSON.parse(sessionStorage.getItem("user")) : null;
 
-  const login = (username, userType) => {
+  const [auth, setAuth] = useState(!!initialAuth);
+  const [user, setUser] = useState(initialAuth);
+
+  const navigate = useNavigate();
+
+  const login = (userData) => {
+    sessionStorage.setItem("user", JSON.stringify(userData));
     setAuth(true);
-    setUserName(username);
-    setusrType(userType);
-
-    // Store authentication data in Local Storage
-    localStorage.setItem(
-      "userAuth",
-      JSON.stringify({
-        auth,
-        userName,
-        userId,
-        usrType,
-      })
-    );
+    setUser(userData);
+    navigateBasedOnUserType(userData.userType);
   };
 
-  // Retrieve data from Local Storage on component mount
-  useEffect(() => {
-    const userAuth = localStorage.getItem("userAuth");
-    if (userAuth) {
-      const { auth, userName, userId, usrType } = JSON.parse(userAuth);
-      setAuth(auth);
-      setUserName(userName);
-      setUserId(userId);
-      setusrType(usrType);
+  const logout = () => {
+    sessionStorage.removeItem("user");
+    setAuth(false);
+    setUser(null);
+    navigate("/login");
+  };
+
+  const navigateBasedOnUserType = (userType) => {
+    if (userType === "admin") {
+      navigate("/admin");
+    } else if (userType === "user") {
+      navigate("/organizer");
+    } else {
+      navigate("/");
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    if (!token) {
+      setAuth(false);
+      setUser(null);
+      navigate("/");
+    } else {
+      const userData = JSON.parse(sessionStorage.getItem("user"));
+      setUser(userData);
+      navigateBasedOnUserType(userData.userType);
+    }
+  }, [token, navigate]);
 
   return (
-    <AuthContext.Provider
-      value={{
-        usrType,
-        setusrType,
-        auth,
-        userName,
-        userId,
-        setAuth,
-        setUserName,
-        setUserId,
-        login,
-      }}
-    >
+    <AuthContext.Provider value={{ user, auth, setAuth, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
-export const useAuth = () => useContext(AuthContext);
+const useAuth = () => useContext(AuthContext);
+
+export { AuthProvider, useAuth, AuthContext };

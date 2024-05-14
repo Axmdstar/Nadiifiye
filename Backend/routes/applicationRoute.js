@@ -7,6 +7,7 @@ const path = require("path");
 const ApplicationModel = require("../models/applications");
 const UserModel = require("../models/User");
 const OrganizerModel = require("../models/Organizers");
+const sendEmail = require("../utils/mail");
 
 app.use(express.json());
 app.use(cors());
@@ -168,6 +169,11 @@ app.put("/approve/:id", async (req, res) => {
     }
 
     res.status(200).json({ message: "Application approved successfully" });
+    await sendEmail({
+      to: application.email, // Replace with applicant's email
+      subject: "Application Approved",
+      text: " Congratulations, your application has been approved. now you can login using your email and password",
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -205,6 +211,12 @@ app.put("/reject/:id", async (req, res) => {
     }
 
     res.status(200).json({ message: "Application rejected successfully" });
+    const applicantEmail = application.email; // Assuming email is a property of the applicant object
+    await sendEmail({
+      to: applicantEmail, // Replace with applicant's email
+      subject: "Application Rejected",
+      text: "Your application has been rejected. We apologize for any inconvenience.",
+    });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }

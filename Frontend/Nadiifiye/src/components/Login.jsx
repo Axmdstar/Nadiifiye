@@ -37,7 +37,7 @@ function Login() {
           if (data.user.userType == "user") {
             navigate("/organizer");
           } else {
-            navigate("/Admin");
+            navigate("/");
           }
         });
       // const { setAuth, setUserName, setUserId, userId } = useAuth();
@@ -100,7 +100,7 @@ function Login() {
             </div>
             <div>
               <Link
-                to="../forgot-password"
+                to="./forgot-password"
                 className="font-medium text-sm text-green-600 hover:underline"
               >
                 Forgot password?
