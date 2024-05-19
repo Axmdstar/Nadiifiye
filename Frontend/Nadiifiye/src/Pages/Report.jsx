@@ -157,7 +157,7 @@ const Reporting = () => {
                     <thead className="border-b font-medium dark:border-neutral-500">
                       <tr>
                         {Object.keys(fetchedlist[0] || {})
-                          .slice(1, Object.keys(fetchedlist[0]).length - 1)
+                          .slice(2, Object.keys(fetchedlist[0]).length - 1)
                           .map((k, index) => (
                             <th key={index} scope="col" className="px-6 py-4">
                               {k}
@@ -170,7 +170,7 @@ const Reporting = () => {
                         <tr className="">
                           <td
                             colSpan={
-                              Object.keys(fetchedlist[0] || {}).slice(1, Object.keys(fetchedlist[0]).length - 1).length
+                              Object.keys(fetchedlist[0] || {}).slice(2, Object.keys(fetchedlist[0]).length - 1).length
                             }
                             className="text-center"
                           >
@@ -184,9 +184,9 @@ const Reporting = () => {
                             className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-green-100"
                           >
                             {Object.values(item)
-                              .slice(1, Object.keys(fetchedlist[0]).length - 1)
+                              .slice(2, Object.keys(fetchedlist[0]).length - 1)
                               .map((value, index) => {
-                                return Object.keys(fetchedlist[1]).slice(1, Object.keys(fetchedlist[0]).length - 1)[index] == "profileImage" ? (
+                                return Object.keys(fetchedlist[1]).slice(2, Object.keys(fetchedlist[0]).length - 1)[index] == "profileImage" ? (
                                   // <td key={index} className="whitespace-nowrap px-6 py-4"> {value} </td>
                                   <td className="whitespace-nowrap px-6 py-4 font-medium">
                                     {selectedReport.label == "Volunteers" ? (
