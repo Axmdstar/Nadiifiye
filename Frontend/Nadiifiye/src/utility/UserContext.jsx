@@ -14,10 +14,11 @@ const AuthProvider = ({ children }) => {
 
   const navigate = useNavigate();
 
-  const login = (userData) => {
+  const login = async (userData) => {
     sessionStorage.setItem("user", JSON.stringify(userData));
     setAuth(true);
     setUser(userData);
+    console.log('userData :>> ', userData.userType);
     navigateBasedOnUserType(userData.userType);
   };
 
@@ -40,9 +41,10 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (!token) {
+      console.log('token :>> ', token);
       setAuth(false);
       setUser(null);
-      navigate("/");
+      // navigate("/");
     } else {
       const userData = JSON.parse(sessionStorage.getItem("user"));
       setUser(userData);

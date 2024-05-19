@@ -296,7 +296,7 @@ function Register() {
           <div className="text-center mt-4">
             Already have an account?{" "}
             <Link
-              to="./login"
+              to="../login"
               className="font-medium text-green-600 hover:underline"
             >
               Login here

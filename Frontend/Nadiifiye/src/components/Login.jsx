@@ -7,41 +7,40 @@ import { AuthContext } from "../utility/UserContext";
 
 function Login() {
   // user info
-  const { setAuth, setUserName, setUserId, userId, setusrType } =
-    useContext(AuthContext);
+  const { user, auth, setAuth, login, logout } =
+  useContext(AuthContext);
   const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
   const { email, password } = formData;
 
-  console.log(userId);
+  
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      axios
-        .post("http://localhost:4000/auth/login", {
-          email: email,
-          password: password,
-        })
-        .then(({ data }) => {
+      const {data} = await axios.post("http://localhost:4000/auth/login", {
+        email: email,
+        password: password,
+      });
+      
           // Show success toast
           toast.success("Logged successfully");
-          setAuth(true);
-          setUserName(data.user.username);
-          setUserId(data.user._id);
-          setusrType(data.user.userType);
+          // setAuth(true);
+          login(data)
+          
 
           if (data.user.userType == "user") {
             navigate("/organizer");
           } else {
             navigate("/");
           }
-        });
+        
       // const { setAuth, setUserName, setUserId, userId } = useAuth();
     } catch (error) {
+      console.log(error);
       console.error(
         "Login error",
         error.response ? error.response.data : "Error"
