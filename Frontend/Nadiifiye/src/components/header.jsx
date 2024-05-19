@@ -5,7 +5,7 @@ import { useState, useContext } from "react";
 import { AuthContext, useAuth } from "../utility/UserContext";
 
 export default function Header() {
-  const { userId, usrType, username } = useContext(AuthContext);
+  // const { userId, usrType, username } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const scrollToAbout = () => {

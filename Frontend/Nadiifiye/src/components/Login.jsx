@@ -7,13 +7,11 @@ import { AuthContext } from "../utility/UserContext";
 
 function Login() {
   // user info
-  const { user, auth, setAuth, login, logout } =
-  useContext(AuthContext);
+  const { user, auth, setAuth, login, logout } = useContext(AuthContext);
   const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
   const { email, password } = formData;
 
-  
   const onChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -21,23 +19,24 @@ function Login() {
     e.preventDefault();
 
     try {
-      const {data} = await axios.post("http://localhost:4000/auth/login", {
+      const { data } = await axios.post("http://localhost:4000/auth/login", {
         email: email,
         password: password,
       });
-      
-          // Show success toast
-          toast.success("Logged successfully");
-          // setAuth(true);
-          login(data)
-          
 
-          if (data.user.userType == "user") {
-            navigate("/organizer");
-          } else {
-            navigate("/");
-          }
-        
+      // Show success toast
+      toast.success("Logged successfully");
+      // setAuth(true);
+      login(data);
+
+      if (data.user.userType == "user") {
+        navigate("/organizer");
+      } else if (data.user.userType == "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
+
       // const { setAuth, setUserName, setUserId, userId } = useAuth();
     } catch (error) {
       console.log(error);

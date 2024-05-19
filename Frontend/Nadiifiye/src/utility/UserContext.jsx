@@ -18,7 +18,7 @@ const AuthProvider = ({ children }) => {
     sessionStorage.setItem("user", JSON.stringify(userData));
     setAuth(true);
     setUser(userData);
-    console.log('userData :>> ', userData.userType);
+    console.log("userData :>> ", userData.userType);
     navigateBasedOnUserType(userData.userType);
   };
 
@@ -41,7 +41,7 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     if (!token) {
-      console.log('token :>> ', token);
+      console.log("token :>> ", token);
       setAuth(false);
       setUser(null);
       // navigate("/");
