@@ -1,6 +1,8 @@
-import { Outlet } from "react-router-dom";
-import { ClipboardList, Users } from "lucide-react";
-import Sidebar, { SidebarItem } from "../../components/Sidebar";
+
+import {Outlet} from "react-router-dom";
+import { ClipboardList, Users, Flag} from "lucide-react";
+import Sidebar,{SidebarItem} from "../../components/Sidebar";
+
 import { useLocation, NavLink } from "react-router-dom";
 import { AuthContext, useAuth } from "../../utility/UserContext";
 
@@ -20,9 +22,20 @@ const OrganizerDshBLayout = () => {
           <SidebarItem icon={<Users size={20} />} text="Volunteers" />
         </NavLink>
       </Sidebar>
+
+      <NavLink to={"Report"}>
+            <SidebarItem icon={<Flag size={20} />} text="Report" active={ CurrentPath === "Report" ? true : false} />
+          </NavLink>
       <Outlet />
     </div>
   );
 };
 
+
+          
+
+        
+  
+ 
 export default OrganizerDshBLayout;
+

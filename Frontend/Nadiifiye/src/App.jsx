@@ -1,12 +1,10 @@
 import "./App.css";
 import {
   Route,
-  Routes,
   createBrowserRouter,
   RouterProvider,
   createRoutesFromElements,
 } from "react-router-dom";
-
 import HomeLayout from "./Pages/Layout/HomeLayout";
 import HomePage from "./Pages/HomePage";
 import AdminDashBoardLayout from "./Pages/Layout/AdminDashBdLayOut";
@@ -28,19 +26,17 @@ import Applicationspage from "./Pages/Applications";
 import ViewApplicants from "./Pages/viewapplicants";
 import OrgUpdate from "./Pages/OrgUpdate";
 import { AuthContext } from "./utility/UserContext";
-// import Reporting from "./Pages/Report";
+import Reporting from "./Pages/Report";
+import OrgReport from "./Pages/OrgReport";
 
-function App() {
-  return (
-    <Routes>
+const Router = createBrowserRouter(
+  createRoutesFromElements(
+    <Route>
       <Route path="/" element={<HomeLayout />}>
         <Route index element={<HomePage />} />
         <Route path="contact" element={<Contact />} />
         <Route path="campaigns" element={<Campaign />} />
         <Route path="JoinForm/:id" element={<JoinForm />} />
-        <Route path="Register" element={<Register />} />
-        <Route path="login" element={<Login />} />
-        <Route path="forgot-password" element={<ForgotPassword />} />
       </Route>
 
       <Route path="Admin" element={<AdminDashBoardLayout />}>
@@ -54,15 +50,26 @@ function App() {
           path="Applications/viewapplicants/:id"
           element={<ViewApplicants />}
         />
-        {/* <Route path="Report" element={<Reporting />} /> */}
+        <Route path="Report" element={<Reporting />} />
       </Route>
 
       <Route path="Organizer" element={<OrganizerDshBLayout />}>
         <Route index element={<OrgCampaigns />} />
         <Route path="Volunteer" element={<OrgVolunteer />} />
+        <Route path="Report" element={<OrgReport />} />
       </Route>
-    </Routes>
-  );
+
+      <Route path="Register" element={<RegisterLayout />}>
+        <Route index element={<Register />} />
+        <Route path="login" element={<Login />} />
+        <Route path="forgot-password" element={<ForgotPassword />} />
+      </Route>
+    </Route>
+  )
+);
+
+function App() {
+  return <RouterProvider router={Router} />;
 }
 
 export default App;
