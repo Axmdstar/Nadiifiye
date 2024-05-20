@@ -1,11 +1,5 @@
 import "./App.css";
-import {
-  Route,
-  createBrowserRouter,
-  RouterProvider,
-  createRoutesFromElements,
-} from "react-router-dom";
-
+import { Route, Routes } from "react-router-dom";
 import HomeLayout from "./Pages/Layout/HomeLayout";
 import HomePage from "./Pages/HomePage";
 import AdminDashBoardLayout from "./Pages/Layout/AdminDashBdLayOut";
@@ -26,13 +20,12 @@ import Contact from "./Pages/Contact";
 import Applicationspage from "./Pages/Applications";
 import ViewApplicants from "./Pages/viewapplicants";
 import OrgUpdate from "./Pages/OrgUpdate";
-import { AuthContext } from "./utility/UserContext";
 import Reporting from "./Pages/Report";
 import OrgReport from "./Pages/OrgReport";
 
-const Router = createBrowserRouter(
-  createRoutesFromElements(
-    <Route>
+function App() {
+  return (
+    <Routes>
       <Route path="/" element={<HomeLayout />}>
         <Route index element={<HomePage />} />
         <Route path="contact" element={<Contact />} />
@@ -47,7 +40,10 @@ const Router = createBrowserRouter(
         <Route path="Campaigns" element={<CampainsPage />} />
         <Route path="Volunteers" element={<VolunteersPage />} />
         <Route path="updateOrg/:id" element={<OrgUpdate />} />
-        <Route path="Applications/viewapplicants/:id" element={<ViewApplicants />} />
+        <Route
+          path="Applications/viewapplicants/:id"
+          element={<ViewApplicants />}
+        />
         <Route path="Report" element={<Reporting />} />
       </Route>
 
@@ -62,12 +58,8 @@ const Router = createBrowserRouter(
         <Route path="login" element={<Login />} />
         <Route path="forgot-password" element={<ForgotPassword />} />
       </Route>
-    </Route>
-  )
-);
-
-function App() {
-  return <RouterProvider router={Router} />;
+    </Routes>
+  );
 }
 
 export default App;

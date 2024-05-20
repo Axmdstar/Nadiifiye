@@ -5,10 +5,8 @@ import { useState, useContext } from "react";
 import { AuthContext, useAuth } from "../utility/UserContext";
 
 export default function Header() {
-  const { userId, usrType, username } = useContext(AuthContext);
+  // const { userId, usrType, username } = useContext(AuthContext);
   const navigate = useNavigate();
-  console.log(userId);
-  console.log("usrType :>> ", usrType);
 
   const scrollToAbout = () => {
     const aboutSection = document.getElementById("about");
@@ -64,19 +62,15 @@ export default function Header() {
           <Link to="./contact">Contact Us</Link>
         </li>
 
-        {usrType != "" ? (
-          <p></p>
-        ) : (
-          <li>
-            <NavLink
-              to="/Register"
-              className="btn"
-              style={{ backgroundColor: "#28a745" }}
-            >
-              Signup
-            </NavLink>
-          </li>
-        )}
+        <li>
+          <NavLink
+            to="./Register"
+            className="btn"
+            style={{ backgroundColor: "#28a745" }}
+          >
+            Signup
+          </NavLink>
+        </li>
       </ul>
     </div>
   );

@@ -9,7 +9,9 @@ export default defineConfig({
   "server":{
     "proxy":{
       "/Organizer/AllOrganizers":endpoint
-    }
+    },
+    optimizeDeps: {
+    },
   },
   plugins: [react()],
 })

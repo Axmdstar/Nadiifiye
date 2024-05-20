@@ -1,17 +1,17 @@
-// utils/mail.js
 const nodemailer = require("nodemailer");
 
 const sendEmail = async (emailOptions) => {
   let transporter = nodemailer.createTransport({
-    service: "gmail", // Use other service if not using Gmail
+    service: "gmail",
     auth: {
-      user: process.env.EMAIL_USERNAME, // Use environment variables to secure credentials
+      type: "login",
+      user: process.env.EMAIL_ADDRESS,
       pass: process.env.EMAIL_PASSWORD,
     },
   });
 
   let mailOptions = {
-    from: process.env.EMAIL_USERNAME,
+    from: process.env.EMAIL_ADDRESS,
     to: emailOptions.to,
     subject: emailOptions.subject,
     text: emailOptions.text,

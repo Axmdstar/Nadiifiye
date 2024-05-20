@@ -7,6 +7,7 @@ const path = require("path");
 const ApplicationModel = require("../models/applications");
 const UserModel = require("../models/User");
 const OrganizerModel = require("../models/Organizers");
+const sendEmail = require("../utils/mail");
 
 app.use(express.json());
 app.use(cors());
@@ -121,23 +122,22 @@ app.put("/approve/:id", async (req, res) => {
     if (!application) {
       return res.status(404).json({ message: "Application not found" });
     }
+
     application.status = "approved";
     await application.save();
-    // If the user exists, update their status to "active"
+
     const user = await UserModel.findOne({ email: application.email });
     if (user) {
       user.status = "active";
       await user.save();
     }
-    // If the organization exists, update their status to "approved"
-    const organization = await OrganizerModel.findOne({
-      Emaail: application.email,
-    });
+
+    const organization = await OrganizerModel.findOne({ Emaail: application.email });
     if (organization) {
       organization.status = "approved";
       await organization.save();
     }
-    // Save user data to users table if it doesn't already exist
+
     const existingUser = await UserModel.findOne({ email: application.email });
     if (!existingUser) {
       const newUser = new UserModel({
@@ -149,10 +149,7 @@ app.put("/approve/:id", async (req, res) => {
       await newUser.save();
     }
 
-    // Save application data to organizer table if it doesn't already exist
-    const existingOrganizer = await OrganizerModel.findOne({
-      Emaail: application.email,
-    });
+    const existingOrganizer = await OrganizerModel.findOne({ Emaail: application.email });
     if (!existingOrganizer) {
       const newOrganizer = new OrganizerModel({
         Name: application.orgName,
@@ -167,11 +164,23 @@ app.put("/approve/:id", async (req, res) => {
       await newOrganizer.save();
     }
 
+    try {
+      await sendEmail({
+        to: application.email,
+        subject: "Application Approved",
+        text: "Congratulations, your application has been approved. now you can login using your email and password",
+      });
+    } catch (emailError) {
+      console.error("Failed to send email:", emailError);
+    }
+
     res.status(200).json({ message: "Application approved successfully" });
+
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 app.put("/reject/:id", async (req, res) => {
   try {
@@ -179,35 +188,42 @@ app.put("/reject/:id", async (req, res) => {
     if (!application) {
       return res.status(404).json({ message: "Application not found" });
     }
+
     if (application.status === "rejected") {
-      return res
-        .status(400)
-        .json({ message: "Application is already rejected" });
+      return res.status(400).json({ message: "Application is already rejected" });
     }
 
-    application.status = "rejected"; // Update status to rejected
+    application.status = "rejected";
     await application.save();
 
-    // Check if the user exists in the users table
     const user = await UserModel.findOne({ email: application.email });
     if (user) {
-      user.status = "inactive"; // Update user status to inactive
+      user.status = "inactive";
       await user.save();
     }
 
-    // Check if the organization exists in the organizer table
-    const organization = await OrganizerModel.findOne({
-      Emaail: application.email,
-    });
+    const organization = await OrganizerModel.findOne({ Emaail: application.email });
     if (organization) {
-      organization.status = "rejected"; // Update organization status to rejected
+      organization.status = "rejected";
       await organization.save();
     }
 
+    try {
+      await sendEmail({
+        to: application.email,
+        subject: "Application Rejected",
+        text: "Your application has been rejected. We apologize for any inconvenience.",
+      });
+    } catch (emailError) {
+      console.error("Failed to send email:", emailError);
+    }
+
     res.status(200).json({ message: "Application rejected successfully" });
+
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
+
 
 module.exports = app;
