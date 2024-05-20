@@ -5,54 +5,39 @@ import ExportBtn from "../components/ExportBtn";
 
 const Reporting = () => {
   const [selectedReport, setSelectedReport] = useState(null);
-  const [IsLoading, setIsLoading] = useState(true);
-  const [SelectedValue, setSelectedValue] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedValue, setSelectedValue] = useState(null);
+  const [fetchedlist, setFetchedlist] = useState([]);
 
-  //   const [fetchedlist, setFetchedlist] = useState([]);
-
-  //   const options = [
-  //     { label: "Organizers", value: "Organizers" },
-  //     { label: "Campaigns", value: "Campaigns" },
-  //     { label: "Volunteers", value: "Volunteers" },
-  //   ];
+  const options = [
+    { label: "Organizers", value: "Organizers" },
+    { label: "Campaigns", value: "Campaigns" },
+    { label: "Volunteers", value: "Volunteers" },
+  ];
 
   useEffect(() => {
-    if (selectedReport != null && SelectedValue == null) {
+    if (selectedReport != null && selectedValue == null) {
       switch (selectedReport.value) {
         case "Organizers":
           getOrganizer();
-          console.log("selectedReport :>> ", selectedReport);
           break;
         case "Volunteers":
           getVolunteers();
-          console.log("selectedReport :>> ", selectedReport);
           break;
         case "Campaigns":
           getCampaigns();
-          console.log("selectedReport :>> ", selectedReport);
           break;
       }
-    } else if (SelectedValue != null) {
+    } else if (selectedValue != null) {
       switch (selectedReport.value) {
         case "Organizers":
-          console.log("Organizers :>> ", SelectedValue);
-          OrgsCampaign(SelectedValue);
+          OrgsCampaign(selectedValue);
           break;
-        // case "Volunteers":
-        //   console.log('Volunteers :>> ', SelectedValue);
-        //   break;
-        // case "Campaigns":
-        //   console.log('Campaigns :>> ', SelectedValue);
-        //   break;
       }
     }
-  }, [selectedReport, SelectedValue]);
-
-  //   // http://localhost:4000/Organizer/AllOrganizers
-  //   // http://localhost:4000/Campaign/OrgCampaign/:name
+  }, [selectedReport, selectedValue]);
 
   const handleReportType = (option) => {
-    console.log("option :>> ", option);
     setSelectedReport(option);
     setSelectedValue(null);
   };
@@ -65,13 +50,14 @@ const Reporting = () => {
     const endpoint = "http://localhost:4000/Organizer/AllOrganizers";
     setIsLoading(true);
     fetch(endpoint)
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
         setFetchedlist(data);
         setIsLoading(false);
-        console.log("data :>> ", data);
+      })
+      .catch((error) => {
+        console.error("Error fetching organizers:", error);
+        setIsLoading(false);
       });
   };
 
@@ -79,13 +65,14 @@ const Reporting = () => {
     const endpoint = "http://localhost:4000/Volunteer/AllVolunteers";
     setIsLoading(true);
     fetch(endpoint)
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
         setFetchedlist(data);
         setIsLoading(false);
-        console.log("data :>> ", data);
+      })
+      .catch((error) => {
+        console.error("Error fetching volunteers:", error);
+        setIsLoading(false);
       });
   };
 
@@ -93,11 +80,13 @@ const Reporting = () => {
     const endpoint = "http://localhost:4000/Campaign/AllCampaigns";
     setIsLoading(true);
     fetch(endpoint)
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
         setFetchedlist(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching campaigns:", error);
         setIsLoading(false);
       });
   };
@@ -106,56 +95,59 @@ const Reporting = () => {
     const endpoint = `http://localhost:4000/Campaign/OrgCampaign/${orgname}`;
     setIsLoading(true);
     fetch(endpoint)
-      .then((res) => {
-        return res.json();
-      })
+      .then((res) => res.json())
       .then((data) => {
         setFetchedlist(data);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        console.error("Error fetching campaigns for organizer:", error);
         setIsLoading(false);
       });
   };
 
   return (
     <div className="w-10/12">
-      <div className="text-gray-600 w-fit ">
-        <h1 className=" font-medium text-4xl py-5">Reports</h1>
+      <div className="text-gray-600 w-fit">
+        <h1 className="font-medium text-4xl py-5">Reports</h1>
       </div>
 
-      <div className=" w-full flex flex-row gap-4">
+      <div className="w-full flex flex-row gap-4">
         <ComboBox
           options={options}
           onSelect={handleReportType}
           type={"Report"}
         />
 
-        {IsLoading ? (
+        {isLoading ? (
           <div>...</div>
-        ) : selectedReport.value == "Organizers" ? (
+        ) : selectedReport && selectedReport.value === "Organizers" ? (
           <SearchDropdown
             options={fetchedlist}
             onSelect={handleSelectedValue}
           />
-        ) : (
-          ""
-        )}
+        ) : null}
 
         <ExportBtn
           tabledata={fetchedlist}
-          type={!IsLoading ? selectedReport.value : ""}
+          type={!isLoading ? selectedReport?.value : ""}
         />
       </div>
 
-      {selectedReport != null && fetchedlist.length != 0 ? (
-        <div className=" ">
+      {selectedReport != null && fetchedlist.length !== 0 && (
+        <div>
           <div className="flex flex-col">
             <div className="overflow-y-auto overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div className="inline-block py-2 sm:px-6 ">
+              <div className="inline-block py-2 sm:px-6">
                 <div className="overflow-x-scroll overflow-y-scroll h-[68vh]">
                   <table className="w-11/12 text-left text-sm font-light">
                     <thead className="border-b font-medium dark:border-neutral-500">
                       <tr>
                         {Object.keys(fetchedlist[0] || {})
-                          .slice(2, Object.keys(fetchedlist[0]).length - 1)
+                          .slice(
+                            2,
+                            Object.keys(fetchedlist[0] || {}).length - 1
+                          )
                           .map((k, index) => (
                             <th key={index} scope="col" className="px-6 py-4">
                               {k}
@@ -165,12 +157,12 @@ const Reporting = () => {
                     </thead>
                     <tbody>
                       {fetchedlist.length === 0 ? (
-                        <tr className="">
+                        <tr>
                           <td
                             colSpan={
                               Object.keys(fetchedlist[0] || {}).slice(
                                 2,
-                                Object.keys(fetchedlist[0]).length - 1
+                                Object.keys(fetchedlist[0] || {}).length - 1
                               ).length
                             }
                             className="text-center"
@@ -185,42 +177,42 @@ const Reporting = () => {
                             className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-green-100"
                           >
                             {Object.values(item)
-                              .slice(2, Object.keys(fetchedlist[0]).length - 1)
+                              .slice(
+                                2,
+                                Object.keys(fetchedlist[0] || {}).length - 1
+                              )
                               .map((value, index) => {
-                                return Object.keys(fetchedlist[1]).slice(
+                                const key = Object.keys(
+                                  fetchedlist[0] || {}
+                                ).slice(
                                   2,
-                                  Object.keys(fetchedlist[0]).length - 1
-                                )[index] == "profileImage" ? (
-                                  // <td key={index} className="whitespace-nowrap px-6 py-4"> {value} </td>
-                                  <td className="whitespace-nowrap px-6 py-4 font-medium">
-                                    {selectedReport.label == "Volunteers" ? (
+                                  Object.keys(fetchedlist[0] || {}).length - 1
+                                )[index];
+                                return key === "profileImage" ? (
+                                  <td
+                                    key={index}
+                                    className="whitespace-nowrap px-6 py-4 font-medium"
+                                  >
+                                    {selectedReport.label === "Volunteers" && (
                                       <img
                                         src={`http://localhost:4000/uploads/VolunteerImage/${item.profileImage}`}
                                         className="w-12 rounded-full"
                                         alt="Avatar"
                                       />
-                                    ) : (
-                                      ""
                                     )}
-
-                                    {selectedReport.label == "Organizers" ? (
+                                    {selectedReport.label === "Organizers" && (
                                       <img
                                         src={`http://localhost:4000/uploads/organizerImage/${item.profileImage}`}
                                         className="w-12 rounded-full"
                                         alt="Avatar"
                                       />
-                                    ) : (
-                                      ""
                                     )}
-
-                                    {selectedReport.label == "Campaigns" ? (
+                                    {selectedReport.label === "Campaigns" && (
                                       <img
                                         src={`http://localhost:4000/uploads/CampaignImage/${item.profileImage}`}
                                         className="w-12 rounded-full"
                                         alt="Avatar"
                                       />
-                                    ) : (
-                                      ""
                                     )}
                                   </td>
                                 ) : (
@@ -228,8 +220,7 @@ const Reporting = () => {
                                     key={index}
                                     className="whitespace-nowrap px-6 py-4"
                                   >
-                                    {" "}
-                                    {value}{" "}
+                                    {value}
                                   </td>
                                 );
                               })}
@@ -243,78 +234,9 @@ const Reporting = () => {
             </div>
           </div>
         </div>
-      ) : (
-        ""
       )}
     </div>
   );
 };
 
 export default Reporting;
-
-// {
-//   /* <table className="min-w-full text-left text-sm font-light  ">
-//                     <thead className="border-b font-medium dark:border-neutral-500">
-//                       <tr>
-
-//                         {Object.keys(fetchedlist[1]).map((k, index) => {
-//                           return(
-//                             <th scope="col" key={index} className="px-6 py-4">
-//                           {k}
-//                         </th>
-//                           )
-//                         })}
-
-//                       </tr>
-//                     </thead>
-//                     <tbody>
-
-//                       {fetchedlist.length === 0 ?
-//                       <tr className="">
-//                         <td colSpan={6} className=" text-center">
-//                           <p className="text-xl"> Empty </p>
-//                         </td>
-//                       </tr>
-//                        :
-
-//                        fetchedlist.map((item, i) => {
-//                         return (
-//                           <tr
-//                             key={i}
-//                             className="border-b transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-neutral-500 dark:hover:bg-green-100"
-//                           >
-//                             <td className="whitespace-nowrap px-6 py-4 font-medium">
-//                               <img
-//                                 src={`http://localhost:4000/uploads/VolunteerImage/${item.profileImage}`}
-//                                 className="w-12 rounded-full"
-//                                 alt="Avatar"
-//                               />
-//                             </td>
-
-//                             <td className="whitespace-nowrap px-6 py-4">
-//                               {item.Name}
-//                             </td>
-//                             <td className="whitespace-nowrap px-6 py-4">
-//                               {item.Phone}
-//                             </td>
-//                             <td className="whitespace-nowrap px-6 py-4">
-//                               {item.Address}
-//                             </td>
-//                             <td className="whitespace-nowrap px-6 py-4">
-//                               {item.Emaail}
-//                             </td>
-//                             <td className="whitespace-nowrap px-6 py-4">
-//                               {item.TypeOfInterest}
-//                             </td>
-//                             <td className="whitespace-nowrap px-6 py-4">
-//                               {item.numOfEvent}
-//                             </td>
-
-//                           </tr>
-//                         );
-//                       })}
-//                     </tbody>
-//                   </table>
-
-//  */
-// }
