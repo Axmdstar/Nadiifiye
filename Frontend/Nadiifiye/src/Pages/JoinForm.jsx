@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLoaderData, useParams } from "react-router-dom";
+import Cookies from "universal-cookie";
 
 const JoinForm = () => {
   const [Name, setName] = useState("");
@@ -7,13 +8,15 @@ const JoinForm = () => {
   const [Address, setAddress] = useState("");
   const [Emaail, setEmaail] = useState("");
   const [TypeOfInterest, setTypeOfInterest] = useState("");
-  const [numOfEvent, setnumOfEvent] = useState("");
+  const [numOfEvent, setnumOfEvent] = useState(1);
   const [profileImage, setprofileImage] = useState("");
+  const cookie = new Cookies();
 
   const { id } = useParams();
 
   function NewOrg(e) {
     e.preventDefault();
+    
 
     const formdata = new FormData();
     formdata.append("Name", Name);
@@ -25,21 +28,27 @@ const JoinForm = () => {
     formdata.append("profileImage", profileImage);
     formdata.append("Campaigns", id);
 
+    
+
     const requestOptions = {
       method: "POST",
       body: formdata,
-      redirect: "follow",
     };
 
-    fetch("http://localhost:4000/Organizer/addorganizer", requestOptions)
+    fetch("http://localhost:4000/Volunteer/addVolunteer", requestOptions)
       .then((response) => response.json())
-      .then((result) => alert(result.message))
+      .then((result) => {
+                alert("Thank you For volunteering, you be notified soon")
+                
+                cookie.set("VolId", result.VolunteerId)
+                cookie.set("VolName",result.VolunteerName)
+              })
       .catch((error) => console.error(error));
   }
 
   return (
     <>
-      <div className="mx-auto px-6">
+      <div className="mx-auto px-6 mb-40">
         <div className=" text-sm ">
           <div className="flex flex-col">
             <div className="text-gray-600 ">

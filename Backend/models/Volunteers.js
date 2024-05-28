@@ -32,6 +32,10 @@ const VolunteerModel = mongoose.Schema(
       type: String,
       required: true,
     },
+    Campaigns: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

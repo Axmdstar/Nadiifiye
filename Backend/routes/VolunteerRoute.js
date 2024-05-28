@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const VolunteerModel = require("../models/Volunteers");
+const JoinedModel = require("../models/Joined");
+const CampaignsModel = require("../models/Campaigns");
 app.use(express.json());
 app.use(cors());
 const multer = require("multer");
@@ -51,6 +53,7 @@ app.post(
   uploadimg.single("profileImage"),
   async (req, res) => {
     try {
+      console.log('req.body :>> ', req.body);
       const newData = new VolunteerModel({
         Name: req.body.Name,
         Phone: req.body.Phone,
@@ -59,12 +62,28 @@ app.post(
         TypeOfInterest: req.body.TypeOfInterest,
         numOfEvent: req.body.numOfEvent,
         profileImage: req.file.filename,
+        Campaigns: req.body.Campaigns
       });
       const saveData = await newData.save();
+
+      // after save is done 
+      const campaignName = await CampaignsModel.findOne({_id: req.body.Campaigns});
+      const joind = await new JoinedModel({
+        CampaignId: campaignName._id,
+        CampaignName: campaignName.Name,
+        OrganizerName: campaignName.Organizer,
+        VolunteerId: saveData._id,
+        VolunteerName: saveData.Name,
+      }).save();
+
+      
       res.json({
         status: "success",
+        VolunteerId:saveData._id,
+        VolunteerName:saveData.Name,
         message: "successfully added",
       });
+
     } catch (err) {
       res.status(500).json({ error: err.message });
     }

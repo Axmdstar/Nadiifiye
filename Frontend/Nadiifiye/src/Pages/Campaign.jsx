@@ -7,6 +7,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import { BsArrowUp, BsArrowDown } from "react-icons/bs";
 import moment from "moment";
 import "../../public/style.css";
+import Cookies from "universal-cookie";
 import { Navigate, useNavigate } from "react-router-dom";
 
 export default function Campaign() {
@@ -16,6 +17,7 @@ export default function Campaign() {
   const [sortType, setSortType] = useState("date");
   const [sortDirection, setSortDirection] = useState("asc");
   const navigate = useNavigate();
+  const cookie = new Cookies();
 
   useEffect(() => {
     async function fetchData() {
@@ -62,9 +64,37 @@ export default function Campaign() {
   });
 
   const handleJoinCampaign = async (id) => {
-    navigate(`../JoinForm/${id}`);
+    if (cookie.get("VolId")) {
+      const Volid = cookie.get("VolId");
+      const VolName = cookie.get("VolName");
 
+      // Join
+      try {
+        const selectedArry = campaigns.filter((i) => i._id == id);
+      const CamName = selectedArry[0].Name;
+      const OrgName = selectedArry[0].Organizer;
+
+
+      const formdata = new FormData();
+      formdata.append("CampaignId", id);
+      formdata.append("CampaignName", CamName);
+      formdata.append("OrganizerName", OrgName);
+      formdata.append("VolunteerId", Volid);
+      formdata.append("VolunteerName", VolName);
+      
+      const res = await axios.post(`${endpoint}/Joined/AddJoined`, formdata);
+      alert(res.data.message)
+      
+        
+      } catch (error) {
+        alert(error);
+      } 
+      
+    } else {
+
+    navigate(`../JoinForm/${id}`);
     try {
+      
       const response = await axios.patch(`${endpoint}/Campaign/Join/${id}`);
       const updatedCampaigns = campaigns.map((campaignItem) => {
         if (campaignItem._id === id) {
@@ -89,6 +119,7 @@ export default function Campaign() {
       console.error("Error joining campaign:", error);
       toast.error("Error joining campaign");
     }
+  }
   };
 
   return (
