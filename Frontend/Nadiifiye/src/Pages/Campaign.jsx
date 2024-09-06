@@ -7,7 +7,7 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import { BsArrowUp, BsArrowDown } from "react-icons/bs";
 import moment from "moment";
 import "../../public/style.css";
-import { Navigate, useNavigate } from "react-router-dom";
+import {useNavigate } from "react-router-dom";
 
 export default function Campaign() {
   const endpoint = "http://localhost:4000";
@@ -63,32 +63,6 @@ export default function Campaign() {
 
   const handleJoinCampaign = async (id) => {
     navigate(`../JoinForm/${id}`);
-
-    try {
-      const response = await axios.patch(`${endpoint}/Campaign/Join/${id}`);
-      const updatedCampaigns = campaigns.map((campaignItem) => {
-        if (campaignItem._id === id) {
-          const updatedCampaign = {
-            ...campaignItem,
-            currentNumOfPeople: response.data.currentNumOfPeople,
-            NumOfPeople: response.data.NumOfPeople,
-          };
-          return updatedCampaign;
-        }
-        return campaignItem;
-      });
-      setCampaigns(updatedCampaigns);
-
-      const campaign = updatedCampaigns.find(
-        (campaignItem) => campaignItem._id === id
-      );
-
-      Navigate(`./JoinForm/${id}`);
-      // Navigate to another page with the id
-    } catch (error) {
-      console.error("Error joining campaign:", error);
-      toast.error("Error joining campaign");
-    }
   };
 
   return (

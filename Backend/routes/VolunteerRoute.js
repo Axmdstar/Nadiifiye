@@ -57,7 +57,6 @@ app.post(
         Address: req.body.Address,
         Emaail: req.body.Emaail,
         TypeOfInterest: req.body.TypeOfInterest,
-        numOfEvent: req.body.numOfEvent,
         profileImage: req.file.filename,
       });
       const saveData = await newData.save();

@@ -76,22 +76,3 @@ app.post("/AddJoined", uploadimg.single("Image"), async (req, res) => {
 });
 
 module.exports = app;
-// const JoinedModel = mongoose.Schema({
-//     CampaignId: {
-//         type: String,
-//         required: true,
-//     },
-//     OrganizerName: {
-//         type: String,
-//         required: true,
-//     },
-//     VolunteerId: {
-//         type: String,
-//         required: true,
-//     },
-//     VolunteerName: {
-//         type: String,
-//         required: true,
-//     }
-// },{ timestamps: true }
-// )

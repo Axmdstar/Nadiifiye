@@ -27,6 +27,7 @@
     "react-icons": "^5.1.0",
     "react-router-dom": "^6.22.3",
     "react-toastify": "^10.0.5",
+    "reactstrap": "^9.2.2",
     "safe-buffer": "^5.2.1",
     "universal-cookie": "^7.1.4"
   },

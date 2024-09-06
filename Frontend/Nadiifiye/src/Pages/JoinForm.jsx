@@ -1,7 +1,10 @@
-import { useState } from "react";
-import { Link, useLoaderData, useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
 
 const JoinForm = () => {
+  const [campaigns, setCampaigns] = useState([]);
   const [Name, setName] = useState("");
   const [Phone, setPhone] = useState("");
   const [Address, setAddress] = useState("");
@@ -10,9 +13,10 @@ const JoinForm = () => {
   const [numOfEvent, setnumOfEvent] = useState("");
   const [profileImage, setprofileImage] = useState("");
 
+  const navigate = useNavigate();
   const { id } = useParams();
 
-  function NewOrg(e) {
+  function newvolunteer(e) {
     e.preventDefault();
 
     const formdata = new FormData();
@@ -31,23 +35,63 @@ const JoinForm = () => {
       redirect: "follow",
     };
 
-    fetch("http://localhost:4000/Organizer/addorganizer", requestOptions)
+    fetch("http://localhost:4000/Volunteer/addVolunteer", requestOptions)
       .then((response) => response.json())
-      .then((result) => alert(result.message))
+      .then((result) => {
+        toast.success("joined successfully");
+        joined(id);
+        console.log(id);
+        navigate("/campaigns");
+      })
       .catch((error) => console.error(error));
   }
-
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await axios.get(
+          `http://localhost:4000/Campaign/AllCampaigns`
+        );
+        setCampaigns(response.data);
+      } catch (error) {
+        console.error("Error fetching campaigns:", error);
+      }
+    }
+    fetchData();
+  }, []);
+  const joined = async (id) => {
+    try {
+      const response = await axios.patch(
+        `http://localhost:4000/Campaign/Join/${id}`
+      );
+      const updatedCampaigns = campaigns.map((campaignItem) => {
+        if (campaignItem._id === id) {
+          const updatedCampaign = {
+            ...campaignItem,
+            currentNumOfPeople: response.data.currentNumOfPeople,
+            NumOfPeople: response.data.NumOfPeople,
+          };
+          return updatedCampaign;
+        }
+        return campaignItem;
+      });
+      setCampaigns(updatedCampaigns);
+    } catch (error) {
+      console.error("Error joining campaign:", error);
+      console.log("Error response data:", error.response.data);
+      console.log("Error response status:", error.response.status);
+      toast.error("Error joining campaign");
+    }
+  };
   return (
     <>
-      <div className="mx-auto px-6">
+      <div className="mx-auto col-7 mb-5">
         <div className=" text-sm ">
           <div className="flex flex-col">
             <div className="text-gray-600 ">
-              <p className="font-medium text-4xl pt-5">Join Campaign</p>
+              <p className="font-medium text-4xl pt-5 pb-3">Join Campaign</p>
               <p>Please fill out all the fields.</p>
             </div>
-
-            <form className="mt-10" onSubmit={NewOrg}>
+            <form className="mt-10" onSubmit={newvolunteer}>
               <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                 <div className="md:col-span-5">
                   <label className="font-medium">Fullname</label>
@@ -116,7 +160,7 @@ const JoinForm = () => {
 
               {/* file */}
               <div className="py-8">
-                <p>Upload Image</p>
+                <p className="pb-3">Upload Image</p>
                 <input
                   type="file"
                   name="image"
@@ -124,7 +168,6 @@ const JoinForm = () => {
                   onChange={(e) => setprofileImage(e.target.files[0])}
                 />
               </div>
-
               <div className="md:col-span-5 text-right  flex gap-4">
                 {/* submit  */}
                 <div className="inline-flex items-end">
@@ -145,19 +188,15 @@ const JoinForm = () => {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 };
-
 // export const JoinFormLoader = async ({ params }) => {
 //     const { id } = params;
-
 //     const url = `http://localhost:4000/Campaign/single/${id}`;
-
 //     const result = await fetch(url);
 //   const data = await result.json();
-
 //     return data;
 //   };
-
 export default JoinForm;

@@ -26,7 +26,7 @@ const VolunteerModel = mongoose.Schema(
     },
     numOfEvent: {
       type: Number,
-      required: true,
+      default: 1
     },
     profileImage: {
       type: String,
